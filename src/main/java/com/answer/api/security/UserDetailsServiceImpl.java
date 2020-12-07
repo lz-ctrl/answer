@@ -43,6 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+
         if (NONE_USERNAME.equals(phone)) {
             throw new BadCredentialsException("手机号为空");
         }

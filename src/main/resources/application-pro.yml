@@ -1,5 +1,5 @@
 server:
-  port: 6376
+  port: 6377
   address: 0.0.0.0
   ssl:
     key-store: classpath:3768539_www.xizhique.com.pfx
@@ -13,9 +13,9 @@ spring:
       suffix : .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.98.234.34:3306/xzq-suyuan?serverTimezone=GMT%2B8
-    username: xzq
-    password: 2Djb6DmPLKJt5SEt
+    url: jdbc:mysql://47.112.187.145:3306/10e9074341007840?serverTimezone=GMT%2B8
+    username: root
+    password: 10e9074341007840
   redis:
     host: 127.0.0.1
     port: 6379

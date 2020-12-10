@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.answer.api.mapper.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.answer.api.entity.Answer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="questions" property="questions" jdbcType="VARCHAR" />
+    <result column="A" property="a" jdbcType="VARCHAR" />
+    <result column="B" property="b" jdbcType="VARCHAR" />
+    <result column="C" property="c" jdbcType="VARCHAR" />
+    <result column="D" property="d" jdbcType="VARCHAR" />
+    <result column="E" property="e" jdbcType="VARCHAR" />
+    <result column="AF" property="af" jdbcType="VARCHAR" />
+    <result column="BF" property="bf" jdbcType="VARCHAR" />
+    <result column="CF" property="cf" jdbcType="VARCHAR" />
+    <result column="DF" property="df" jdbcType="VARCHAR" />
+    <result column="EF" property="ef" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, questions, A, B, C, D, E, AF, BF, CF, DF, EF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.answer.api.entity.AnswerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from answer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.answer.api.entity.AnswerExample" >
+    delete from answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.answer.api.entity.Answer" >
+    insert into answer (id, questions, A, 
+      B, C, D, E, 
+      AF, BF, CF, DF, 
+      EF)
+    values (#{id,jdbcType=INTEGER}, #{questions,jdbcType=VARCHAR}, #{a,jdbcType=VARCHAR}, 
+      #{b,jdbcType=VARCHAR}, #{c,jdbcType=VARCHAR}, #{d,jdbcType=VARCHAR}, #{e,jdbcType=VARCHAR}, 
+      #{af,jdbcType=VARCHAR}, #{bf,jdbcType=VARCHAR}, #{cf,jdbcType=VARCHAR}, #{df,jdbcType=VARCHAR}, 
+      #{ef,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.answer.api.entity.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questions != null" >
+        questions,
+      </if>
+      <if test="a != null" >
+        A,
+      </if>
+      <if test="b != null" >
+        B,
+      </if>
+      <if test="c != null" >
+        C,
+      </if>
+      <if test="d != null" >
+        D,
+      </if>
+      <if test="e != null" >
+        E,
+      </if>
+      <if test="af != null" >
+        AF,
+      </if>
+      <if test="bf != null" >
+        BF,
+      </if>
+      <if test="cf != null" >
+        CF,
+      </if>
+      <if test="df != null" >
+        DF,
+      </if>
+      <if test="ef != null" >
+        EF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questions != null" >
+        #{questions,jdbcType=VARCHAR},
+      </if>
+      <if test="a != null" >
+        #{a,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        #{c,jdbcType=VARCHAR},
+      </if>
+      <if test="d != null" >
+        #{d,jdbcType=VARCHAR},
+      </if>
+      <if test="e != null" >
+        #{e,jdbcType=VARCHAR},
+      </if>
+      <if test="af != null" >
+        #{af,jdbcType=VARCHAR},
+      </if>
+      <if test="bf != null" >
+        #{bf,jdbcType=VARCHAR},
+      </if>
+      <if test="cf != null" >
+        #{cf,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        #{df,jdbcType=VARCHAR},
+      </if>
+      <if test="ef != null" >
+        #{ef,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.answer.api.entity.AnswerExample" resultType="java.lang.Integer" >
+    select count(*) from answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update answer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.questions != null" >
+        questions = #{record.questions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a != null" >
+        A = #{record.a,jdbcType=VARCHAR},
+      </if>
+      <if test="record.b != null" >
+        B = #{record.b,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c != null" >
+        C = #{record.c,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d != null" >
+        D = #{record.d,jdbcType=VARCHAR},
+      </if>
+      <if test="record.e != null" >
+        E = #{record.e,jdbcType=VARCHAR},
+      </if>
+      <if test="record.af != null" >
+        AF = #{record.af,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bf != null" >
+        BF = #{record.bf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cf != null" >
+        CF = #{record.cf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.df != null" >
+        DF = #{record.df,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ef != null" >
+        EF = #{record.ef,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update answer
+    set id = #{record.id,jdbcType=INTEGER},
+      questions = #{record.questions,jdbcType=VARCHAR},
+      A = #{record.a,jdbcType=VARCHAR},
+      B = #{record.b,jdbcType=VARCHAR},
+      C = #{record.c,jdbcType=VARCHAR},
+      D = #{record.d,jdbcType=VARCHAR},
+      E = #{record.e,jdbcType=VARCHAR},
+      AF = #{record.af,jdbcType=VARCHAR},
+      BF = #{record.bf,jdbcType=VARCHAR},
+      CF = #{record.cf,jdbcType=VARCHAR},
+      DF = #{record.df,jdbcType=VARCHAR},
+      EF = #{record.ef,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.answer.api.entity.Answer" >
+    update answer
+    <set >
+      <if test="questions != null" >
+        questions = #{questions,jdbcType=VARCHAR},
+      </if>
+      <if test="a != null" >
+        A = #{a,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        B = #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        C = #{c,jdbcType=VARCHAR},
+      </if>
+      <if test="d != null" >
+        D = #{d,jdbcType=VARCHAR},
+      </if>
+      <if test="e != null" >
+        E = #{e,jdbcType=VARCHAR},
+      </if>
+      <if test="af != null" >
+        AF = #{af,jdbcType=VARCHAR},
+      </if>
+      <if test="bf != null" >
+        BF = #{bf,jdbcType=VARCHAR},
+      </if>
+      <if test="cf != null" >
+        CF = #{cf,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        DF = #{df,jdbcType=VARCHAR},
+      </if>
+      <if test="ef != null" >
+        EF = #{ef,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.answer.api.entity.Answer" >
+    update answer
+    set questions = #{questions,jdbcType=VARCHAR},
+      A = #{a,jdbcType=VARCHAR},
+      B = #{b,jdbcType=VARCHAR},
+      C = #{c,jdbcType=VARCHAR},
+      D = #{d,jdbcType=VARCHAR},
+      E = #{e,jdbcType=VARCHAR},
+      AF = #{af,jdbcType=VARCHAR},
+      BF = #{bf,jdbcType=VARCHAR},
+      CF = #{cf,jdbcType=VARCHAR},
+      DF = #{df,jdbcType=VARCHAR},
+      EF = #{ef,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

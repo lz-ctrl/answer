@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * @author yjj
+ * @author YinJunjie
  *
  */
 @Service
@@ -17,7 +17,11 @@ public class AnswerInformationServiceImpl implements AnswerInformationService {
     @Autowired
     private AnswerInformationMapper answerInformationMapper;
 
-    //获取前端传入的id，根据id获取信息
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public int getPoints(int id) {
         AnswerInformation information = answerInformationMapper.selectByPrimaryKey(id);

@@ -2,6 +2,11 @@ package com.answer.api.service;
 
 public interface AnswerInformationService {
 
-    //获取用户分数
+    /**
+     *
+     * @param id
+     * @return
+     * 获取用户的分数
+     */
     int getPoints (int id);
 }

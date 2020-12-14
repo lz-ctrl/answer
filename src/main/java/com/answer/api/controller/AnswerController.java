@@ -8,13 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * @author YinJunjie
+ * @date
+ */
 @Controller
 public class AnswerController {
 
     @Autowired
     private AnswerService answerService;
 
-    //用户答题
+    /**
+     *
+     * @param id
+     * @param answer
+     * @return
+     * 用户答题
+     */
     @RequestMapping(value = "question",method = RequestMethod.GET)
     public String question(@RequestParam(value = "id",defaultValue = "2") int[] id , @RequestParam(value = "answer",defaultValue = "A") String[] answer){
         //返回调用答题方法

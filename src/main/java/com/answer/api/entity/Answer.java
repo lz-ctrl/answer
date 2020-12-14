@@ -27,6 +27,8 @@ public class Answer implements Serializable {
 
     private String ef;
 
+    private Integer typeId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -123,5 +125,13 @@ public class Answer implements Serializable {
 
     public void setEf(String ef) {
         this.ef = ef == null ? null : ef.trim();
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 }

@@ -1,11 +1,20 @@
 package com.answer.api.service.impl;
 
+import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
+import com.answer.api.entity.Option;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.service.AnswerService;
+import com.answer.api.utils.BeanMapper;
+import com.answer.api.vo.CompleteVo;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -73,5 +82,184 @@ public class AnswerServiceImpl implements AnswerService{
         }
         //返回。。。
         return null;
+    }
+
+    @Override
+    public List<Answer> findAll() {
+        List<Answer> list=answerMapper.selectList(new EntityWrapper<>());
+        list.forEach(answer -> {
+            Option option=new Option();
+            option.setA(answer.getA());
+            option.setB(answer.getB());
+            option.setC(answer.getC());
+            option.setD(answer.getD());
+            option.setE(answer.getE());
+            answer.setOption(option);
+        });
+        return list;
+    }
+
+    @Override
+    public CompleteVo complete(List<AnswerDto> list) {
+        //这里表示总分数
+        AtomicInteger score = new AtomicInteger();
+        //老虎的分数
+        AtomicInteger tigerScore = new AtomicInteger();
+        //孔雀的分数
+        AtomicInteger peacockScore = new AtomicInteger();
+        //考拉的分数
+        AtomicInteger koalaScore = new AtomicInteger();
+        //猫头鹰的分数
+        AtomicInteger owlScore = new AtomicInteger();
+        //蜥蜴的分数
+        AtomicInteger lizardScore = new AtomicInteger();
+        //answer的id数组
+        List<Integer> ids=new ArrayList<>();
+        //查询出所选题目的数据
+        list.forEach(answerDto -> {
+            ids.add(answerDto.getId());
+        });
+        List<Answer> answerList=answerMapper.findByIds(ids);
+        list.forEach(answerDto -> {
+           String optionStr= answerDto.getOptionStr();
+           Integer id=answerDto.getId();
+           answerList.forEach(answer -> {
+               if(id.equals(answer.getId())){
+                   switch (optionStr){
+                       case "A":
+                          switch (answer.getType()){
+                              case 1:
+                                  tigerScore.addAndGet(Integer.parseInt(answer.getAf()));
+                              break;
+                              case 2:
+                                  peacockScore.addAndGet(Integer.parseInt(answer.getAf()));
+                              break;
+                              case 3:
+                                  koalaScore.addAndGet(Integer.parseInt(answer.getAf()));
+                              break;
+                              case 4:
+                                  owlScore.addAndGet(Integer.parseInt(answer.getAf()));
+                              break;
+                              case 5:
+                                  lizardScore.addAndGet(Integer.parseInt(answer.getAf()));
+                              break;
+                          }
+                           score.addAndGet(Integer.parseInt(answer.getAf()));
+                           break;
+                       case "B":
+                           switch (answer.getType()){
+                               case 1:
+                                   tigerScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   break;
+                               case 2:
+                                   peacockScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   break;
+                               case 3:
+                                   koalaScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   break;
+                               case 4:
+                                   owlScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   break;
+                               case 5:
+                                   lizardScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   break;
+                           }
+                           score.addAndGet(Integer.parseInt(answer.getBf()));
+                           break;
+                       case "C":
+                           switch (answer.getType()){
+                               case 1:
+                                   tigerScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   break;
+                               case 2:
+                                   peacockScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   break;
+                               case 3:
+                                   koalaScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   break;
+                               case 4:
+                                   owlScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   break;
+                               case 5:
+                                   lizardScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   break;
+                           }
+                           score.addAndGet(Integer.parseInt(answer.getCf()));
+                           break;
+                       case "D":
+                           switch (answer.getType()){
+                               case 1:
+                                   tigerScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   break;
+                               case 2:
+                                   peacockScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   break;
+                               case 3:
+                                   koalaScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   break;
+                               case 4:
+                                   owlScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   break;
+                               case 5:
+                                   lizardScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   break;
+                           }
+                           score.addAndGet(Integer.parseInt(answer.getDf()));
+                           break;
+                       default:
+                           switch (answer.getType()){
+                               case 1:
+                                   tigerScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   break;
+                               case 2:
+                                   peacockScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   break;
+                               case 3:
+                                   koalaScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   break;
+                               case 4:
+                                   owlScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   break;
+                               case 5:
+                                   lizardScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   break;
+                           }
+                           score.addAndGet(Integer.parseInt(answer.getEf()));
+                   }
+               }
+           });
+        });
+        System.out.println("最终得分>>>>>>>>>>>>>"+score);
+        CompleteVo completeVo=new CompleteVo();
+        completeVo.setScore(score.get());
+        //这里开始比较最高分 表示用户属于哪种类型
+        Integer []arr={tigerScore.get(),peacockScore.get(),koalaScore.get(),owlScore.get(),lizardScore.get()};
+        //使用冒泡排序法将最大的得分放在第一个
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] < arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        //这里进行判断,得出最高分的类型
+        if(tigerScore.get()==arr[0]){
+            System.out.println("老虎"+tigerScore);
+        }
+        if(peacockScore.get()==arr[0]){
+            System.out.println("孔雀"+peacockScore);
+        }
+        if(koalaScore.get()==arr[0]){
+            System.out.println("考拉"+koalaScore);
+        }
+        if(owlScore.get()==arr[0]){
+            System.out.println("猫头鹰"+owlScore);
+        }
+        if(lizardScore.get()==arr[0]){
+            System.out.println("变色龙"+lizardScore);
+        }
+        return completeVo;
     }
 }

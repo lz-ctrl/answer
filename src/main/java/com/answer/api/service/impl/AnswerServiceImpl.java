@@ -9,6 +9,7 @@ import com.answer.api.service.AnswerService;
 import com.answer.api.utils.BeanMapper;
 import com.answer.api.vo.CompleteVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,8 +86,10 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public List<Answer> findAll() {
-        List<Answer> list=answerMapper.selectList(new EntityWrapper<>());
+    public List<Answer> findAll(Integer page,Integer size) {
+        Page<Answer> pages=new Page<>(page, size);
+        System.out.println(page+"--------"+size);
+        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<>());
         list.forEach(answer -> {
             Option option=new Option();
             option.setA(answer.getA());
@@ -247,6 +250,7 @@ public class AnswerServiceImpl implements AnswerService{
         //这里进行判断,得出最高分的类型
         if(tigerScore.get()==arr[0]){
             System.out.println("老虎"+tigerScore);
+            //TODO 这里要查询出模板数据塞入Vo
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
@@ -260,6 +264,7 @@ public class AnswerServiceImpl implements AnswerService{
         if(lizardScore.get()==arr[0]){
             System.out.println("变色龙"+lizardScore);
         }
+        //TODO 方法最后插入用户记录表
         return completeVo;
     }
 }

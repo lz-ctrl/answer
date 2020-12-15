@@ -4,14 +4,14 @@ import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
+import com.answer.api.exception.ServiceException;
 import com.answer.api.service.AnswerService;
 import com.answer.api.utils.BeanMapper;
-import com.answer.api.utils.BeanUtil;
 import com.answer.api.vo.AnswerVo;
 import com.answer.api.vo.CompleteVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Api(tags = "答题接口")
 @RestController
 @RequestMapping("answer")
 public class AnswerController {
@@ -29,7 +30,6 @@ public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
-    //用户答题
     @RequestMapping(value = "question",method = RequestMethod.GET)
     public String question(@RequestParam(value = "id",defaultValue = "2") int[] id , @RequestParam(value = "answer",defaultValue = "A") String[] answer){
         //返回调用答题方法
@@ -38,16 +38,20 @@ public class AnswerController {
         return null;
     }
 
-
+    @ApiOperation(value = "查询所有题目", notes = "查询所有题目")
     @GetMapping("list")
-    public RestApiResult<List<AnswerVo>> list(){
-        return new RestApiResult<>(RestCode.SUCCESS, BeanMapper.mapList(answerService.findAll(),AnswerVo.class));
+    public RestApiResult<List<AnswerVo>> list(@RequestParam(value = "page",defaultValue = "0")Integer page,
+                                              @RequestParam(value = "size",defaultValue = "30")Integer size){
+        return new RestApiResult<>(RestCode.SUCCESS, BeanMapper.mapList(answerService.findAll(page,size),AnswerVo.class));
     }
 
 
-    @ApiOperation(value = "完成题目结算", notes = "所有题目答完提交")
+    @ApiOperation(value = "完成题目结算(传对象数组)", notes = "所有题目答完提交")
     @PostMapping("complete")
     public RestApiResult<CompleteVo> complete(@RequestBody List<AnswerDto> list){
+        if(list.size()<=0){
+            throw new ServiceException(RestCode.BAD_REQUEST_408);
+        }
         return new RestApiResult<>(RestCode.SUCCESS, answerService.complete(list));
     }
 }

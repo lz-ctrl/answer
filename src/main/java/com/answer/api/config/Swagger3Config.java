@@ -45,14 +45,14 @@ public class Swagger3Config {
                 .enable(ebable)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.resume.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.answer.api.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("resume接口文档")
+                .title("answer接口文档")
                 .description("文档描述")
                 .version("1.0")
                 .build();

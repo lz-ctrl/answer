@@ -1,4 +1,4 @@
-package com.answer.api.dao;
+package com.answer.api.mapper;
 
 import com.answer.api.entity.User;
 import com.baomidou.mybatisplus.mapper.BaseMapper;

@@ -19,7 +19,7 @@ public interface AnswerService {
      * 查询所以答题
      * @return
      */
-    List<Answer> findAll();
+    List<Answer> findAll(Integer page,Integer size);
 
     /**
      * 结算题目

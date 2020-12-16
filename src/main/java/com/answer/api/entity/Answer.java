@@ -17,15 +17,15 @@ public class Answer implements Serializable {
 
     private String e;
 
-    private String af;
+    private Integer af;
 
-    private String bf;
+    private Integer bf;
 
-    private String cf;
+    private Integer cf;
 
-    private String df;
+    private Integer df;
 
-    private String ef;
+    private Integer ef;
 
     private Integer typeId;
 
@@ -87,44 +87,44 @@ public class Answer implements Serializable {
         this.e = e == null ? null : e.trim();
     }
 
-    public String getAf() {
+    public Integer getAf() {
         return af;
     }
 
-    public void setAf(String af) {
-        this.af = af == null ? null : af.trim();
+    public void setAf(Integer af) {
+        this.af = af;
     }
 
-    public String getBf() {
+    public Integer getBf() {
         return bf;
     }
 
-    public void setBf(String bf) {
-        this.bf = bf == null ? null : bf.trim();
+    public void setBf(Integer bf) {
+        this.bf = bf;
     }
 
-    public String getCf() {
+    public Integer getCf() {
         return cf;
     }
 
-    public void setCf(String cf) {
-        this.cf = cf == null ? null : cf.trim();
+    public void setCf(Integer cf) {
+        this.cf = cf;
     }
 
-    public String getDf() {
+    public Integer getDf() {
         return df;
     }
 
-    public void setDf(String df) {
-        this.df = df == null ? null : df.trim();
+    public void setDf(Integer df) {
+        this.df = df;
     }
 
-    public String getEf() {
+    public Integer getEf() {
         return ef;
     }
 
-    public void setEf(String ef) {
-        this.ef = ef == null ? null : ef.trim();
+    public void setEf(Integer ef) {
+        this.ef = ef;
     }
 
     public Integer getTypeId() {

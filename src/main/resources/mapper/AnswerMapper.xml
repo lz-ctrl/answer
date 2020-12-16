@@ -9,11 +9,11 @@
     <result column="C" property="c" jdbcType="VARCHAR" />
     <result column="D" property="d" jdbcType="VARCHAR" />
     <result column="E" property="e" jdbcType="VARCHAR" />
-    <result column="AF" property="af" jdbcType="VARCHAR" />
-    <result column="BF" property="bf" jdbcType="VARCHAR" />
-    <result column="CF" property="cf" jdbcType="VARCHAR" />
-    <result column="DF" property="df" jdbcType="VARCHAR" />
-    <result column="EF" property="ef" jdbcType="VARCHAR" />
+    <result column="AF" property="af" jdbcType="INTEGER" />
+    <result column="BF" property="bf" jdbcType="INTEGER" />
+    <result column="CF" property="cf" jdbcType="INTEGER" />
+    <result column="DF" property="df" jdbcType="INTEGER" />
+    <result column="EF" property="ef" jdbcType="INTEGER" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -114,8 +114,8 @@
       EF, type_id)
     values (#{id,jdbcType=INTEGER}, #{questions,jdbcType=VARCHAR}, #{a,jdbcType=VARCHAR}, 
       #{b,jdbcType=VARCHAR}, #{c,jdbcType=VARCHAR}, #{d,jdbcType=VARCHAR}, #{e,jdbcType=VARCHAR}, 
-      #{af,jdbcType=VARCHAR}, #{bf,jdbcType=VARCHAR}, #{cf,jdbcType=VARCHAR}, #{df,jdbcType=VARCHAR}, 
-      #{ef,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER})
+      #{af,jdbcType=INTEGER}, #{bf,jdbcType=INTEGER}, #{cf,jdbcType=INTEGER}, #{df,jdbcType=INTEGER}, 
+      #{ef,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.answer.api.entity.Answer" >
     insert into tb_answer
@@ -183,19 +183,19 @@
         #{e,jdbcType=VARCHAR},
       </if>
       <if test="af != null" >
-        #{af,jdbcType=VARCHAR},
+        #{af,jdbcType=INTEGER},
       </if>
       <if test="bf != null" >
-        #{bf,jdbcType=VARCHAR},
+        #{bf,jdbcType=INTEGER},
       </if>
       <if test="cf != null" >
-        #{cf,jdbcType=VARCHAR},
+        #{cf,jdbcType=INTEGER},
       </if>
       <if test="df != null" >
-        #{df,jdbcType=VARCHAR},
+        #{df,jdbcType=INTEGER},
       </if>
       <if test="ef != null" >
-        #{ef,jdbcType=VARCHAR},
+        #{ef,jdbcType=INTEGER},
       </if>
       <if test="typeId != null" >
         #{typeId,jdbcType=INTEGER},
@@ -233,19 +233,19 @@
         E = #{record.e,jdbcType=VARCHAR},
       </if>
       <if test="record.af != null" >
-        AF = #{record.af,jdbcType=VARCHAR},
+        AF = #{record.af,jdbcType=INTEGER},
       </if>
       <if test="record.bf != null" >
-        BF = #{record.bf,jdbcType=VARCHAR},
+        BF = #{record.bf,jdbcType=INTEGER},
       </if>
       <if test="record.cf != null" >
-        CF = #{record.cf,jdbcType=VARCHAR},
+        CF = #{record.cf,jdbcType=INTEGER},
       </if>
       <if test="record.df != null" >
-        DF = #{record.df,jdbcType=VARCHAR},
+        DF = #{record.df,jdbcType=INTEGER},
       </if>
       <if test="record.ef != null" >
-        EF = #{record.ef,jdbcType=VARCHAR},
+        EF = #{record.ef,jdbcType=INTEGER},
       </if>
       <if test="record.typeId != null" >
         type_id = #{record.typeId,jdbcType=INTEGER},
@@ -264,11 +264,11 @@
       C = #{record.c,jdbcType=VARCHAR},
       D = #{record.d,jdbcType=VARCHAR},
       E = #{record.e,jdbcType=VARCHAR},
-      AF = #{record.af,jdbcType=VARCHAR},
-      BF = #{record.bf,jdbcType=VARCHAR},
-      CF = #{record.cf,jdbcType=VARCHAR},
-      DF = #{record.df,jdbcType=VARCHAR},
-      EF = #{record.ef,jdbcType=VARCHAR},
+      AF = #{record.af,jdbcType=INTEGER},
+      BF = #{record.bf,jdbcType=INTEGER},
+      CF = #{record.cf,jdbcType=INTEGER},
+      DF = #{record.df,jdbcType=INTEGER},
+      EF = #{record.ef,jdbcType=INTEGER},
       type_id = #{record.typeId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,19 +296,19 @@
         E = #{e,jdbcType=VARCHAR},
       </if>
       <if test="af != null" >
-        AF = #{af,jdbcType=VARCHAR},
+        AF = #{af,jdbcType=INTEGER},
       </if>
       <if test="bf != null" >
-        BF = #{bf,jdbcType=VARCHAR},
+        BF = #{bf,jdbcType=INTEGER},
       </if>
       <if test="cf != null" >
-        CF = #{cf,jdbcType=VARCHAR},
+        CF = #{cf,jdbcType=INTEGER},
       </if>
       <if test="df != null" >
-        DF = #{df,jdbcType=VARCHAR},
+        DF = #{df,jdbcType=INTEGER},
       </if>
       <if test="ef != null" >
-        EF = #{ef,jdbcType=VARCHAR},
+        EF = #{ef,jdbcType=INTEGER},
       </if>
       <if test="typeId != null" >
         type_id = #{typeId,jdbcType=INTEGER},
@@ -324,11 +324,11 @@
       C = #{c,jdbcType=VARCHAR},
       D = #{d,jdbcType=VARCHAR},
       E = #{e,jdbcType=VARCHAR},
-      AF = #{af,jdbcType=VARCHAR},
-      BF = #{bf,jdbcType=VARCHAR},
-      CF = #{cf,jdbcType=VARCHAR},
-      DF = #{df,jdbcType=VARCHAR},
-      EF = #{ef,jdbcType=VARCHAR},
+      AF = #{af,jdbcType=INTEGER},
+      BF = #{bf,jdbcType=INTEGER},
+      CF = #{cf,jdbcType=INTEGER},
+      DF = #{df,jdbcType=INTEGER},
+      EF = #{ef,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

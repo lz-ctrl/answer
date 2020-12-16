@@ -3,11 +3,11 @@ package com.answer.api.service.impl;
 import com.answer.api.entity.Answer;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
+import com.answer.api.mapper.CharacterAnalysisMapper;
 import com.answer.api.service.AnswerService;
+import com.answer.api.vo.AnswerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Array;
 
 
 /**
@@ -20,6 +20,8 @@ public class AnswerServiceImpl implements AnswerService{
     private AnswerMapper answerMapper;
     @Autowired
     private AnswerInformationMapper answerInformationMapper;
+    @Autowired
+    private CharacterAnalysisMapper analysisMapper;
 
     /**
      *实现用户答题
@@ -31,167 +33,246 @@ public class AnswerServiceImpl implements AnswerService{
      * @return
      */
     @Override
-    public Answer questionAnswering(int[] id, String[] answer) {
+    public AnswerVo questionAnswering(int[] id, String[] answer) {
         /**
          * 获取到前端传过来的id和答案
          * 根据不同性格的id，分成5个数组
          * 根据存有不同性格
          */
         //初始用户分数
-        //老虎
+        //老虎性格的分数
         int tigerScore = 0;
-        //孔雀
+        //孔雀性格的分数
         int peacockScore = 0;
-        //考拉
+        //考拉性格的分数
         int koalaScore = 0;
-        //猫头鹰
+        //猫头鹰性格的分数
         int owlScore = 0;
-        //变色龙
+        //变色龙性格的分数
         int chameleonScore = 0;
+        //定义最大得分
+        int maxScore = 0;
+        //定义类型
+        int type = 0;
+        //最大分数的类型id
+        int typeId = 0;
 
         //首先获取到用户的题目和选项
         //前端传过来用户的题号和答案
 
-        for (int i: id) {
+        for (int i : id) {
             //根据题目id查找题目的所有信息(id，问题，选项，分值，所属性格)
             Answer answer1 = answerMapper.selectByPrimaryKey(i);
             //获取对应的类型
-            int type = answer1.getTypeId();
+            type = answer1.getTypeId();
             //循环用户的答案，获得选项
             for (String ua: answer) {
-                //用switch判断符合条件的项
-                switch (ua){
-                    case "A":
-                        //转为int计算
-                        int af = Integer.parseInt(answer1.getAf());
-                        switch (type){
-                            case 1:
-                                //如果题目的类型的1，则是老虎型的性格，老虎型的性格分数+5
-                                tigerScore=af+tigerScore;
+                switch (type){
+                    case 1:
+                        switch (ua){
+                            case "A":
+                                //获取到A选项的分数
+                                Integer af = answer1.getAf();
+                                //如果题目的类型是老虎型，且答案为A，加五分
+                                tigerScore = tigerScore+af;
+                            break;
+                            case "B":
+                                //获取到A选项的分数
+                                Integer bf = answer1.getBf();
+                                //如果题目的类型是老虎型，且答案为A，加四分
+                                tigerScore = tigerScore+bf;
                                 break;
-                            case 2:
-                                //如果题目的类型的2，则是孔雀型的性格，孔雀型的性格分数+5
-                                peacockScore=af+peacockScore;
+                            case "C":
+                                //获取到A选项的分数
+                                Integer cf = answer1.getCf();
+                                //如果题目的类型是老虎型，且答案为A，加三分
+                                tigerScore = tigerScore+cf;
                                 break;
-                            case 3:
-                                //如果题目的类型的2，则是考拉型的性格，考拉型的性格分数+5
-                                koalaScore=af+koalaScore;
-                                break;
-                            case 4:
-                                //如果题目的类型的2，则是猫头鹰型的性格，猫头鹰型的性格分数+5
-                                owlScore=af+owlScore;
+                            case "D":
+                                //获取到A选项的分数
+                                Integer df = answer1.getDf();
+                                //如果题目的类型是老虎型，且答案为A，加二分
+                                tigerScore = tigerScore+df;
                                 break;
                             default:
-                                //如果题目的类型的2，则是变色龙型的性格，变色龙型的性格分数+5
-                                chameleonScore=af+chameleonScore;
+                                //获取到A选项的分数
+                                Integer ef = answer1.getEf();
+                                //如果题目的类型是老虎型，且答案为A，加一分
+                                tigerScore = tigerScore+ef;
+                        }
+                    break;
+                    case 2:
+                        switch (ua){
+                            case "A":
+                                //获取到A选项的分数
+                                Integer af = answer1.getAf();
+                                //如果题目的类型是老虎型，且答案为A，加五分
+                                peacockScore = peacockScore+af;
                                 break;
+                            case "B":
+                                //获取到A选项的分数
+                                Integer bf = answer1.getBf();
+                                //如果题目的类型是老虎型，且答案为A，加四分
+                                peacockScore = peacockScore+bf;
+                                break;
+                            case "C":
+                                //获取到A选项的分数
+                                Integer cf = answer1.getCf();
+                                //如果题目的类型是老虎型，且答案为A，加三分
+                                peacockScore = peacockScore+cf;
+                                break;
+                            case "D":
+                                //获取到A选项的分数
+                                Integer df = answer1.getDf();
+                                //如果题目的类型是老虎型，且答案为A，加二分
+                                peacockScore = peacockScore+df;
+                                break;
+                            default:
+                                //获取到A选项的分数
+                                Integer ef = answer1.getEf();
+                                //如果题目的类型是老虎型，且答案为A，加一分
+                                peacockScore = peacockScore+ef;
                         }
                         break;
-                    case "B":
-                        int bf = Integer.parseInt(answer1.getBf());
-                        switch (type){
-                            case 1:
-                                //如果题目的类型的1，则是老虎型的性格，老虎型的性格分数+5
-                                tigerScore=bf+tigerScore;
+                    case 3:
+                        switch (ua){
+                            case "A":
+                                //获取到A选项的分数
+                                Integer af = answer1.getAf();
+                                //如果题目的类型是老虎型，且答案为A，加五分
+                                koalaScore = koalaScore+af;
                                 break;
-                            case 2:
-                                //如果题目的类型的2，则是孔雀型的性格，孔雀型的性格分数+5
-                                peacockScore=bf+peacockScore;
+                            case "B":
+                                //获取到A选项的分数
+                                Integer bf = answer1.getBf();
+                                //如果题目的类型是老虎型，且答案为A，加四分
+                                koalaScore = koalaScore+bf;
                                 break;
-                            case 3:
-                                //如果题目的类型的2，则是考拉型的性格，考拉型的性格分数+5
-                                koalaScore=bf+koalaScore;
+                            case "C":
+                                //获取到A选项的分数
+                                Integer cf = answer1.getCf();
+                                //如果题目的类型是老虎型，且答案为A，加三分
+                                koalaScore = koalaScore+cf;
                                 break;
-                            case 4:
-                                //如果题目的类型的2，则是猫头鹰型的性格，猫头鹰型的性格分数+5
-                                owlScore=bf+owlScore;
+                            case "D":
+                                //获取到A选项的分数
+                                Integer df = answer1.getDf();
+                                //如果题目的类型是老虎型，且答案为A，加二分
+                                koalaScore = koalaScore+df;
                                 break;
                             default:
-                                //如果题目的类型的2，则是变色龙型的性格，变色龙型的性格分数+5
-                                chameleonScore=bf+chameleonScore;
-                                break;
+                                //获取到A选项的分数
+                                Integer ef = answer1.getEf();
+                                //如果题目的类型是老虎型，且答案为A，加一分
+                                koalaScore = koalaScore+ef;
                         }
                         break;
-                    case "C":
-                        int cf = Integer.parseInt(answer1.getCf());
-                        switch (type){
-                            case 1:
-                                //如果题目的类型的1，则是老虎型的性格，老虎型的性格分数+5
-                                tigerScore=cf+tigerScore;
+                    case 4:
+                        switch (ua){
+                            case "A":
+                                //获取到A选项的分数
+                                Integer af = answer1.getAf();
+                                //如果题目的类型是老虎型，且答案为A，加五分
+                                owlScore = owlScore+af;
                                 break;
-                            case 2:
-                                //如果题目的类型的2，则是孔雀型的性格，孔雀型的性格分数+5
-                                peacockScore=cf+peacockScore;
+                            case "B":
+                                //获取到A选项的分数
+                                Integer bf = answer1.getBf();
+                                //如果题目的类型是老虎型，且答案为A，加四分
+                                owlScore = owlScore+bf;
                                 break;
-                            case 3:
-                                //如果题目的类型的2，则是考拉型的性格，考拉型的性格分数+5
-                                koalaScore=cf+koalaScore;
+                            case "C":
+                                //获取到A选项的分数
+                                Integer cf = answer1.getCf();
+                                //如果题目的类型是老虎型，且答案为A，加三分
+                                owlScore = owlScore+cf;
                                 break;
-                            case 4:
-                                //如果题目的类型的2，则是猫头鹰型的性格，猫头鹰型的性格分数+5
-                                owlScore=cf+owlScore;
+                            case "D":
+                                //获取到A选项的分数
+                                Integer df = answer1.getDf();
+                                //如果题目的类型是老虎型，且答案为A，加二分
+                                owlScore = owlScore+df;
                                 break;
                             default:
-                                //如果题目的类型的2，则是变色龙型的性格，变色龙型的性格分数+5
-                                chameleonScore=cf+chameleonScore;
-                                break;
+                                //获取到A选项的分数
+                                Integer ef = answer1.getEf();
+                                //如果题目的类型是老虎型，且答案为A，加一分
+                                owlScore = owlScore+ef;
                         }
                         break;
-                    case "D":
-                        int df = Integer.parseInt(answer1.getDf());
-                        switch (type){
-                            case 1:
-                                //如果题目的类型的1，则是老虎型的性格，老虎型的性格分数+5
-                                tigerScore=df+tigerScore;
+                    case 5:
+                        switch (ua){
+                            case "A":
+                                //获取到A选项的分数
+                                Integer af = answer1.getAf();
+                                //如果题目的类型是老虎型，且答案为A，加五分
+                                chameleonScore = chameleonScore+af;
                                 break;
-                            case 2:
-                                //如果题目的类型的2，则是孔雀型的性格，孔雀型的性格分数+5
-                                peacockScore=df+peacockScore;
+                            case "B":
+                                //获取到A选项的分数
+                                Integer bf = answer1.getBf();
+                                //如果题目的类型是老虎型，且答案为A，加四分
+                                chameleonScore = chameleonScore+bf;
                                 break;
-                            case 3:
-                                //如果题目的类型的2，则是考拉型的性格，考拉型的性格分数+5
-                                koalaScore=df+koalaScore;
+                            case "C":
+                                //获取到A选项的分数
+                                Integer cf = answer1.getCf();
+                                //如果题目的类型是老虎型，且答案为A，加三分
+                                chameleonScore = chameleonScore+cf;
                                 break;
-                            case 4:
-                                //如果题目的类型的2，则是猫头鹰型的性格，猫头鹰型的性格分数+5
-                                owlScore=df+owlScore;
+                            case "D":
+                                //获取到A选项的分数
+                                Integer df = answer1.getDf();
+                                //如果题目的类型是老虎型，且答案为A，加二分
+                                chameleonScore = chameleonScore+df;
                                 break;
                             default:
-                                //如果题目的类型的2，则是变色龙型的性格，变色龙型的性格分数+5
-                                chameleonScore=df+chameleonScore;
-                                break;
+                                //获取到A选项的分数
+                                Integer ef = answer1.getEf();
+                                //如果题目的类型是老虎型，且答案为A，加一分
+                                chameleonScore = chameleonScore+ef;
                         }
                         break;
-                    default:
-                        int ef = Integer.parseInt(answer1.getEf());
-                        switch (type){
-                            case 1:
-                                //如果题目的类型的1，则是老虎型的性格，老虎型的性格分数+5
-                                tigerScore=ef+tigerScore;
-                                break;
-                            case 2:
-                                //如果题目的类型的2，则是孔雀型的性格，孔雀型的性格分数+5
-                                peacockScore=ef+peacockScore;
-                                break;
-                            case 3:
-                                //如果题目的类型的2，则是考拉型的性格，考拉型的性格分数+5
-                                koalaScore=ef+koalaScore;
-                                break;
-                            case 4:
-                                //如果题目的类型的2，则是猫头鹰型的性格，猫头鹰型的性格分数+5
-                                owlScore=ef+owlScore;
-                                break;
-                            default:
-                                //如果题目的类型的2，则是变色龙型的性格，变色龙型的性格分数+5
-                                chameleonScore=ef+chameleonScore;
-                                break;
-                        }
                 }
             }
             //一轮循环结束，跳出循环，否则会连续循环i次
             break;
         }
+        //循环结束完后，对分数进行对比，获得最大的分数
+        int [] fraction = {tigerScore,peacockScore,koalaScore,owlScore,chameleonScore,0};
+        //冒泡排序获得最大分数
+        for (int i = 0; i < fraction.length; i++) {
+            for (int j = 0; j < fraction.length - 1 - i; j++) {
+                if (fraction[j] > fraction[j + 1]) {
+                    maxScore = fraction[j];
+                    fraction[j] = fraction[j + 1];
+                    fraction[j + 1] = maxScore;
+                }
+            }
+        }
+        //获取最大分数对应的性格
+        if (maxScore == tigerScore){
+            typeId = 1;
+        }else if (maxScore == peacockScore){
+            typeId = 2;
+        }else if (maxScore == koalaScore){
+            typeId = 3;
+        }else if (maxScore == owlScore){
+            typeId = 4;
+        }else{
+            typeId = 5;
+        }
+
+        System.out.println("类型："+type);
+        System.out.println("最大分数："+maxScore);
         //返回。。。
-        return null;
+        AnswerVo answerVo = new AnswerVo();
+        //设置最高分
+        answerVo.setMaxScore(maxScore);
+        //设置最高分所属类型
+        answerVo.setTypeId(typeId);
+        System.out.println("最高分："+maxScore);
+        System.out.println("最高分性格类型："+typeId);
+        return new AnswerVo();
     }
 }

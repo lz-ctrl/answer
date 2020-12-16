@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author YinJunjie
- *
+ *用户答题的分数
  */
 @Service
 public class AnswerInformationServiceImpl implements AnswerInformationService {

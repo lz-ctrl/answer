@@ -31,7 +31,9 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成哪些表(更改tableName和domainObjectName) -->
-        <table tableName="tb_answer" domainObjectName="Answer"/>
+<!--        tb_character_analysis-->
+        <table tableName="tb_character_analysis" domainObjectName="CharacterAnalysis"/>
+<!--        <table tableName="tb_answer" domainObjectName="Answer"/>-->
 <!--        <table tableName="emp"/>-->
     </context>
 </generatorConfiguration>

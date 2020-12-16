@@ -594,62 +594,52 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andAfEqualTo(String value) {
+        public Criteria andAfEqualTo(Integer value) {
             addCriterion("AF =", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfNotEqualTo(String value) {
+        public Criteria andAfNotEqualTo(Integer value) {
             addCriterion("AF <>", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfGreaterThan(String value) {
+        public Criteria andAfGreaterThan(Integer value) {
             addCriterion("AF >", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfGreaterThanOrEqualTo(String value) {
+        public Criteria andAfGreaterThanOrEqualTo(Integer value) {
             addCriterion("AF >=", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfLessThan(String value) {
+        public Criteria andAfLessThan(Integer value) {
             addCriterion("AF <", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfLessThanOrEqualTo(String value) {
+        public Criteria andAfLessThanOrEqualTo(Integer value) {
             addCriterion("AF <=", value, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfLike(String value) {
-            addCriterion("AF like", value, "af");
-            return (Criteria) this;
-        }
-
-        public Criteria andAfNotLike(String value) {
-            addCriterion("AF not like", value, "af");
-            return (Criteria) this;
-        }
-
-        public Criteria andAfIn(List<String> values) {
+        public Criteria andAfIn(List<Integer> values) {
             addCriterion("AF in", values, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfNotIn(List<String> values) {
+        public Criteria andAfNotIn(List<Integer> values) {
             addCriterion("AF not in", values, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfBetween(String value1, String value2) {
+        public Criteria andAfBetween(Integer value1, Integer value2) {
             addCriterion("AF between", value1, value2, "af");
             return (Criteria) this;
         }
 
-        public Criteria andAfNotBetween(String value1, String value2) {
+        public Criteria andAfNotBetween(Integer value1, Integer value2) {
             addCriterion("AF not between", value1, value2, "af");
             return (Criteria) this;
         }
@@ -664,62 +654,52 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andBfEqualTo(String value) {
+        public Criteria andBfEqualTo(Integer value) {
             addCriterion("BF =", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfNotEqualTo(String value) {
+        public Criteria andBfNotEqualTo(Integer value) {
             addCriterion("BF <>", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfGreaterThan(String value) {
+        public Criteria andBfGreaterThan(Integer value) {
             addCriterion("BF >", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfGreaterThanOrEqualTo(String value) {
+        public Criteria andBfGreaterThanOrEqualTo(Integer value) {
             addCriterion("BF >=", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfLessThan(String value) {
+        public Criteria andBfLessThan(Integer value) {
             addCriterion("BF <", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfLessThanOrEqualTo(String value) {
+        public Criteria andBfLessThanOrEqualTo(Integer value) {
             addCriterion("BF <=", value, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfLike(String value) {
-            addCriterion("BF like", value, "bf");
-            return (Criteria) this;
-        }
-
-        public Criteria andBfNotLike(String value) {
-            addCriterion("BF not like", value, "bf");
-            return (Criteria) this;
-        }
-
-        public Criteria andBfIn(List<String> values) {
+        public Criteria andBfIn(List<Integer> values) {
             addCriterion("BF in", values, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfNotIn(List<String> values) {
+        public Criteria andBfNotIn(List<Integer> values) {
             addCriterion("BF not in", values, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfBetween(String value1, String value2) {
+        public Criteria andBfBetween(Integer value1, Integer value2) {
             addCriterion("BF between", value1, value2, "bf");
             return (Criteria) this;
         }
 
-        public Criteria andBfNotBetween(String value1, String value2) {
+        public Criteria andBfNotBetween(Integer value1, Integer value2) {
             addCriterion("BF not between", value1, value2, "bf");
             return (Criteria) this;
         }
@@ -734,62 +714,52 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andCfEqualTo(String value) {
+        public Criteria andCfEqualTo(Integer value) {
             addCriterion("CF =", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfNotEqualTo(String value) {
+        public Criteria andCfNotEqualTo(Integer value) {
             addCriterion("CF <>", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfGreaterThan(String value) {
+        public Criteria andCfGreaterThan(Integer value) {
             addCriterion("CF >", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfGreaterThanOrEqualTo(String value) {
+        public Criteria andCfGreaterThanOrEqualTo(Integer value) {
             addCriterion("CF >=", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfLessThan(String value) {
+        public Criteria andCfLessThan(Integer value) {
             addCriterion("CF <", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfLessThanOrEqualTo(String value) {
+        public Criteria andCfLessThanOrEqualTo(Integer value) {
             addCriterion("CF <=", value, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfLike(String value) {
-            addCriterion("CF like", value, "cf");
-            return (Criteria) this;
-        }
-
-        public Criteria andCfNotLike(String value) {
-            addCriterion("CF not like", value, "cf");
-            return (Criteria) this;
-        }
-
-        public Criteria andCfIn(List<String> values) {
+        public Criteria andCfIn(List<Integer> values) {
             addCriterion("CF in", values, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfNotIn(List<String> values) {
+        public Criteria andCfNotIn(List<Integer> values) {
             addCriterion("CF not in", values, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfBetween(String value1, String value2) {
+        public Criteria andCfBetween(Integer value1, Integer value2) {
             addCriterion("CF between", value1, value2, "cf");
             return (Criteria) this;
         }
 
-        public Criteria andCfNotBetween(String value1, String value2) {
+        public Criteria andCfNotBetween(Integer value1, Integer value2) {
             addCriterion("CF not between", value1, value2, "cf");
             return (Criteria) this;
         }
@@ -804,62 +774,52 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andDfEqualTo(String value) {
+        public Criteria andDfEqualTo(Integer value) {
             addCriterion("DF =", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfNotEqualTo(String value) {
+        public Criteria andDfNotEqualTo(Integer value) {
             addCriterion("DF <>", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfGreaterThan(String value) {
+        public Criteria andDfGreaterThan(Integer value) {
             addCriterion("DF >", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfGreaterThanOrEqualTo(String value) {
+        public Criteria andDfGreaterThanOrEqualTo(Integer value) {
             addCriterion("DF >=", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfLessThan(String value) {
+        public Criteria andDfLessThan(Integer value) {
             addCriterion("DF <", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfLessThanOrEqualTo(String value) {
+        public Criteria andDfLessThanOrEqualTo(Integer value) {
             addCriterion("DF <=", value, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfLike(String value) {
-            addCriterion("DF like", value, "df");
-            return (Criteria) this;
-        }
-
-        public Criteria andDfNotLike(String value) {
-            addCriterion("DF not like", value, "df");
-            return (Criteria) this;
-        }
-
-        public Criteria andDfIn(List<String> values) {
+        public Criteria andDfIn(List<Integer> values) {
             addCriterion("DF in", values, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfNotIn(List<String> values) {
+        public Criteria andDfNotIn(List<Integer> values) {
             addCriterion("DF not in", values, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfBetween(String value1, String value2) {
+        public Criteria andDfBetween(Integer value1, Integer value2) {
             addCriterion("DF between", value1, value2, "df");
             return (Criteria) this;
         }
 
-        public Criteria andDfNotBetween(String value1, String value2) {
+        public Criteria andDfNotBetween(Integer value1, Integer value2) {
             addCriterion("DF not between", value1, value2, "df");
             return (Criteria) this;
         }
@@ -874,62 +834,52 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andEfEqualTo(String value) {
+        public Criteria andEfEqualTo(Integer value) {
             addCriterion("EF =", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfNotEqualTo(String value) {
+        public Criteria andEfNotEqualTo(Integer value) {
             addCriterion("EF <>", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfGreaterThan(String value) {
+        public Criteria andEfGreaterThan(Integer value) {
             addCriterion("EF >", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfGreaterThanOrEqualTo(String value) {
+        public Criteria andEfGreaterThanOrEqualTo(Integer value) {
             addCriterion("EF >=", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfLessThan(String value) {
+        public Criteria andEfLessThan(Integer value) {
             addCriterion("EF <", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfLessThanOrEqualTo(String value) {
+        public Criteria andEfLessThanOrEqualTo(Integer value) {
             addCriterion("EF <=", value, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfLike(String value) {
-            addCriterion("EF like", value, "ef");
-            return (Criteria) this;
-        }
-
-        public Criteria andEfNotLike(String value) {
-            addCriterion("EF not like", value, "ef");
-            return (Criteria) this;
-        }
-
-        public Criteria andEfIn(List<String> values) {
+        public Criteria andEfIn(List<Integer> values) {
             addCriterion("EF in", values, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfNotIn(List<String> values) {
+        public Criteria andEfNotIn(List<Integer> values) {
             addCriterion("EF not in", values, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfBetween(String value1, String value2) {
+        public Criteria andEfBetween(Integer value1, Integer value2) {
             addCriterion("EF between", value1, value2, "ef");
             return (Criteria) this;
         }
 
-        public Criteria andEfNotBetween(String value1, String value2) {
+        public Criteria andEfNotBetween(Integer value1, Integer value2) {
             addCriterion("EF not between", value1, value2, "ef");
             return (Criteria) this;
         }

@@ -109,7 +109,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public AnswerInformation complete(List<AnswerDto> list) {
+    public AnswerInformation complete(List<AnswerDto> list,Integer titleId) {
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();
         //老虎的分数
@@ -263,7 +263,7 @@ public class AnswerServiceImpl implements AnswerService{
     public CompleteVo submit(Integer userId) {
         //查询出用户记录的分数
         //把各项分数求和 计算最大值
-        List<AnswerInformation> list=new ArrayList<>();
+        List<AnswerInformation> list=answerInformationMapper.selectList(new EntityWrapper<AnswerInformation>().eq("user_id",userId));
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();
         //老虎的分数

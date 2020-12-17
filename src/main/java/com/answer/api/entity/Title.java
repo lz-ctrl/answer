@@ -1,6 +1,8 @@
 package com.answer.api.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,6 +18,7 @@ import lombok.experimental.Accessors;
 @TableName("tb_title")
 public class Title {
 
+    @TableId(value = "id", type = IdType.AUTO)
     private int id;
 
     private String title;

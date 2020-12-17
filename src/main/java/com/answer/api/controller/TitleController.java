@@ -17,15 +17,15 @@ import java.util.List;
  * @author YinJunjie
  * @date 2020-12-17 14:44
  */
+@Api(tags = "副标题接口")
 @RestController
-@Api
-@RequestMapping("find")
+@RequestMapping("title")
 public class TitleController {
 
     @Autowired
     private TitleService titleService;
 
-    @PostMapping("title")
+    @PostMapping("list")
     @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
     public RestApiResult<List<Title>> findAll(){
         return new RestApiResult<>(RestCode.SUCCESS,titleService.findAll());

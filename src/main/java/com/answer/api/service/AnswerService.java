@@ -32,7 +32,7 @@ public interface AnswerService {
      * @param list
      * @return
      */
-    AnswerInformation complete(List<AnswerDto> list);
+    AnswerInformation complete(List<AnswerDto> list,Integer titleId);
 
     /**
      * 提交题目

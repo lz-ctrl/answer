@@ -1,15 +1,14 @@
 package com.answer.api.service;
 
+import com.answer.api.dto.UserDto;
 import com.answer.api.entity.User;
-import org.springframework.stereotype.Service;
 
 /**
  * @author lz
  */
-@Service
-public class UserService {
+public interface UserService {
 
-    public User findUserByPhone(String phone){
-        return null;
-    }
+    User userLogin(UserDto userDto);
+
+
 }

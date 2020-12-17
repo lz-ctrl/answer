@@ -9,4 +9,5 @@ import lombok.Data;
 public class UserDto {
    private Integer id;
    private String openId;
+   private String code;
 }

@@ -14,4 +14,6 @@ public class AnswerDto {
     private String optionStr;
     @ApiModelProperty("题目的id")
     private Integer id;
+    @ApiModelProperty("副标题的id")
+    private Integer titleId;
 }

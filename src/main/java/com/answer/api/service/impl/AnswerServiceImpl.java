@@ -1,16 +1,20 @@
 package com.answer.api.service.impl;
 
+import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
 import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.Option;
+import com.answer.api.exception.ServiceException;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.mapper.CharacterAnalysisMapper;
 import com.answer.api.service.AnswerService;
+import com.answer.api.vo.AnswerInformationVo;
 import com.answer.api.vo.CompleteVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -240,9 +244,18 @@ public class AnswerServiceImpl implements AnswerService{
            });
         });
         System.out.println("最终得分>>>>>>>>>>>>>"+score);
-        AnswerInformation answerInformation=new AnswerInformation();
+        AnswerInformation answerInformation = new AnswerInformation();
         //TODO 方法最后插入用户记录表
-
+        answerInformation.setScore(score.get());
+        answerInformation.setTigerScore(tigerScore.get());
+        answerInformation.setPeacockScore(peacockScore.get());
+        answerInformation.setKoalaScore(koalaScore.get());
+        answerInformation.setOwlScore(owlScore.get());
+        answerInformation.setLizardScore(lizardScore.get());
+        Integer ins = answerInformationMapper.insert(answerInformation);
+        if (ins == 0 || ins == null){
+            throw new ServiceException(RestCode.EX_HANDLER_302);
+        }
         return answerInformation;
     }
 

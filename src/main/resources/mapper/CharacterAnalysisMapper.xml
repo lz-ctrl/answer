@@ -4,13 +4,11 @@
   <resultMap id="BaseResultMap" type="com.answer.api.entity.CharacterAnalysis" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="character_name" property="characterName" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.answer.api.entity.CharacterAnalysisWithBLOBs" extends="BaseResultMap" >
-    <result column="personality_profile" property="personalityProfile" jdbcType="LONGVARCHAR" />
-    <result column="personality_characteristics" property="personalityCharacteristics" jdbcType="LONGVARCHAR" />
-    <result column="advantage" property="advantage" jdbcType="LONGVARCHAR" />
-    <result column="shortcoming" property="shortcoming" jdbcType="LONGVARCHAR" />
-    <result column="work_style" property="workStyle" jdbcType="LONGVARCHAR" />
+    <result column="personality_profile" property="personalityProfile" jdbcType="VARCHAR" />
+    <result column="personality_characteristics" property="personalityCharacteristics" jdbcType="VARCHAR" />
+    <result column="advantage" property="advantage" jdbcType="VARCHAR" />
+    <result column="shortcoming" property="shortcoming" jdbcType="VARCHAR" />
+    <result column="work_style" property="workStyle" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,27 +69,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, character_name
+    id, character_name, personality_profile, personality_characteristics, advantage, 
+    shortcoming, work_style
   </sql>
-  <sql id="Blob_Column_List" >
-    personality_profile, personality_characteristics, advantage, shortcoming, work_style
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.answer.api.entity.CharacterAnalysisExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tb_character_analysis
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.answer.api.entity.CharacterAnalysisExample" >
     select
     <if test="distinct" >
@@ -106,11 +86,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from tb_character_analysis
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -124,20 +102,23 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.answer.api.entity.CharacterAnalysisWithBLOBs" >
-    insert into tb_character_analysis (id, character_name, personality_profile, 
+  <insert id="insert" parameterType="com.answer.api.entity.CharacterAnalysis" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_character_analysis (character_name, personality_profile, 
       personality_characteristics, advantage, 
       shortcoming, work_style)
-    values (#{id,jdbcType=INTEGER}, #{characterName,jdbcType=VARCHAR}, #{personalityProfile,jdbcType=LONGVARCHAR}, 
-      #{personalityCharacteristics,jdbcType=LONGVARCHAR}, #{advantage,jdbcType=LONGVARCHAR}, 
-      #{shortcoming,jdbcType=LONGVARCHAR}, #{workStyle,jdbcType=LONGVARCHAR})
+    values (#{characterName,jdbcType=VARCHAR}, #{personalityProfile,jdbcType=VARCHAR}, 
+      #{personalityCharacteristics,jdbcType=VARCHAR}, #{advantage,jdbcType=VARCHAR}, 
+      #{shortcoming,jdbcType=VARCHAR}, #{workStyle,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.answer.api.entity.CharacterAnalysisWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.answer.api.entity.CharacterAnalysis" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_character_analysis
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="characterName != null" >
         character_name,
       </if>
@@ -158,26 +139,23 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="characterName != null" >
         #{characterName,jdbcType=VARCHAR},
       </if>
       <if test="personalityProfile != null" >
-        #{personalityProfile,jdbcType=LONGVARCHAR},
+        #{personalityProfile,jdbcType=VARCHAR},
       </if>
       <if test="personalityCharacteristics != null" >
-        #{personalityCharacteristics,jdbcType=LONGVARCHAR},
+        #{personalityCharacteristics,jdbcType=VARCHAR},
       </if>
       <if test="advantage != null" >
-        #{advantage,jdbcType=LONGVARCHAR},
+        #{advantage,jdbcType=VARCHAR},
       </if>
       <if test="shortcoming != null" >
-        #{shortcoming,jdbcType=LONGVARCHAR},
+        #{shortcoming,jdbcType=VARCHAR},
       </if>
       <if test="workStyle != null" >
-        #{workStyle,jdbcType=LONGVARCHAR},
+        #{workStyle,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -197,34 +175,21 @@
         character_name = #{record.characterName,jdbcType=VARCHAR},
       </if>
       <if test="record.personalityProfile != null" >
-        personality_profile = #{record.personalityProfile,jdbcType=LONGVARCHAR},
+        personality_profile = #{record.personalityProfile,jdbcType=VARCHAR},
       </if>
       <if test="record.personalityCharacteristics != null" >
-        personality_characteristics = #{record.personalityCharacteristics,jdbcType=LONGVARCHAR},
+        personality_characteristics = #{record.personalityCharacteristics,jdbcType=VARCHAR},
       </if>
       <if test="record.advantage != null" >
-        advantage = #{record.advantage,jdbcType=LONGVARCHAR},
+        advantage = #{record.advantage,jdbcType=VARCHAR},
       </if>
       <if test="record.shortcoming != null" >
-        shortcoming = #{record.shortcoming,jdbcType=LONGVARCHAR},
+        shortcoming = #{record.shortcoming,jdbcType=VARCHAR},
       </if>
       <if test="record.workStyle != null" >
-        work_style = #{record.workStyle,jdbcType=LONGVARCHAR},
+        work_style = #{record.workStyle,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update tb_character_analysis
-    set id = #{record.id,jdbcType=INTEGER},
-      character_name = #{record.characterName,jdbcType=VARCHAR},
-      personality_profile = #{record.personalityProfile,jdbcType=LONGVARCHAR},
-      personality_characteristics = #{record.personalityCharacteristics,jdbcType=LONGVARCHAR},
-      advantage = #{record.advantage,jdbcType=LONGVARCHAR},
-      shortcoming = #{record.shortcoming,jdbcType=LONGVARCHAR},
-      work_style = #{record.workStyle,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -232,48 +197,48 @@
   <update id="updateByExample" parameterType="map" >
     update tb_character_analysis
     set id = #{record.id,jdbcType=INTEGER},
-      character_name = #{record.characterName,jdbcType=VARCHAR}
+      character_name = #{record.characterName,jdbcType=VARCHAR},
+      personality_profile = #{record.personalityProfile,jdbcType=VARCHAR},
+      personality_characteristics = #{record.personalityCharacteristics,jdbcType=VARCHAR},
+      advantage = #{record.advantage,jdbcType=VARCHAR},
+      shortcoming = #{record.shortcoming,jdbcType=VARCHAR},
+      work_style = #{record.workStyle,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.answer.api.entity.CharacterAnalysisWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.answer.api.entity.CharacterAnalysis" >
     update tb_character_analysis
     <set >
       <if test="characterName != null" >
         character_name = #{characterName,jdbcType=VARCHAR},
       </if>
       <if test="personalityProfile != null" >
-        personality_profile = #{personalityProfile,jdbcType=LONGVARCHAR},
+        personality_profile = #{personalityProfile,jdbcType=VARCHAR},
       </if>
       <if test="personalityCharacteristics != null" >
-        personality_characteristics = #{personalityCharacteristics,jdbcType=LONGVARCHAR},
+        personality_characteristics = #{personalityCharacteristics,jdbcType=VARCHAR},
       </if>
       <if test="advantage != null" >
-        advantage = #{advantage,jdbcType=LONGVARCHAR},
+        advantage = #{advantage,jdbcType=VARCHAR},
       </if>
       <if test="shortcoming != null" >
-        shortcoming = #{shortcoming,jdbcType=LONGVARCHAR},
+        shortcoming = #{shortcoming,jdbcType=VARCHAR},
       </if>
       <if test="workStyle != null" >
-        work_style = #{workStyle,jdbcType=LONGVARCHAR},
+        work_style = #{workStyle,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.answer.api.entity.CharacterAnalysisWithBLOBs" >
-    update tb_character_analysis
-    set character_name = #{characterName,jdbcType=VARCHAR},
-      personality_profile = #{personalityProfile,jdbcType=LONGVARCHAR},
-      personality_characteristics = #{personalityCharacteristics,jdbcType=LONGVARCHAR},
-      advantage = #{advantage,jdbcType=LONGVARCHAR},
-      shortcoming = #{shortcoming,jdbcType=LONGVARCHAR},
-      work_style = #{workStyle,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.answer.api.entity.CharacterAnalysis" >
     update tb_character_analysis
-    set character_name = #{characterName,jdbcType=VARCHAR}
+    set character_name = #{characterName,jdbcType=VARCHAR},
+      personality_profile = #{personalityProfile,jdbcType=VARCHAR},
+      personality_characteristics = #{personalityCharacteristics,jdbcType=VARCHAR},
+      advantage = #{advantage,jdbcType=VARCHAR},
+      shortcoming = #{shortcoming,jdbcType=VARCHAR},
+      work_style = #{workStyle,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

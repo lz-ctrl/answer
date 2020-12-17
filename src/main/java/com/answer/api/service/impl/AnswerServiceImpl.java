@@ -2,6 +2,7 @@ package com.answer.api.service.impl;
 
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
+import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.Option;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
@@ -105,7 +106,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public CompleteVo complete(List<AnswerDto> list) {
+    public AnswerInformation complete(List<AnswerDto> list) {
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();
         //老虎的分数
@@ -235,8 +236,38 @@ public class AnswerServiceImpl implements AnswerService{
            });
         });
         System.out.println("最终得分>>>>>>>>>>>>>"+score);
-        CompleteVo completeVo=new CompleteVo();
-        completeVo.setScore(score.get());
+        AnswerInformation answerInformation=new AnswerInformation();
+        //TODO 方法最后插入用户记录表
+
+        return answerInformation;
+    }
+
+    @Override
+    public CompleteVo submit(Integer userId) {
+        //查询出用户记录的分数
+        //把各项分数求和 计算最大值
+        List<AnswerInformation> list=new ArrayList<>();
+        //这里表示总分数
+        AtomicInteger score = new AtomicInteger();
+        //老虎的分数
+        AtomicInteger tigerScore = new AtomicInteger();
+        //孔雀的分数
+        AtomicInteger peacockScore = new AtomicInteger();
+        //考拉的分数
+        AtomicInteger koalaScore = new AtomicInteger();
+        //猫头鹰的分数
+        AtomicInteger owlScore = new AtomicInteger();
+        //蜥蜴的分数
+        AtomicInteger lizardScore = new AtomicInteger();
+        list.forEach(answerInformation -> {
+            score.addAndGet(answerInformation.getScore());
+            tigerScore.addAndGet(answerInformation.getTigerScore());
+            peacockScore.addAndGet(answerInformation.getPeacockScore());
+            koalaScore.addAndGet(answerInformation.getKoalaScore());
+            owlScore.addAndGet(answerInformation.getOwlScore());
+            lizardScore.addAndGet(answerInformation.getLizardScore());
+        });
+
         //这里开始比较最高分 表示用户属于哪种类型
         Integer []arr={tigerScore.get(),peacockScore.get(),koalaScore.get(),owlScore.get(),lizardScore.get()};
         //使用冒泡排序法将最大的得分放在第一个
@@ -249,33 +280,30 @@ public class AnswerServiceImpl implements AnswerService{
                 }
             }
         }
+        CompleteVo completeVo=new CompleteVo();
+        completeVo.setScore(score.get());
         //这里进行判断,得出最高分的类型
         if(tigerScore.get()==arr[0]){
             System.out.println("老虎"+tigerScore);
             //TODO 这里要查询出模板数据塞入Vo
+            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(1));
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
-           // CharacterAnalysisWithBLOBs modelId = analysisMapper.selectby(2);
-           // completeVo.setModelId(modelId);
+            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(2));
         }
         if(koalaScore.get()==arr[0]){
             System.out.println("考拉"+koalaScore);
+            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(3));
         }
         if(owlScore.get()==arr[0]){
             System.out.println("猫头鹰"+owlScore);
+            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(4));
         }
         if(lizardScore.get()==arr[0]){
             System.out.println("变色龙"+lizardScore);
+            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(5));
         }
-        //TODO 方法最后插入用户记录表
         return completeVo;
-    }
-
-    @Override
-    public Character submit(Integer userId) {
-        //查询出用户记录的分数
-        //把各项分数求和 计算最大值
-        return null;
     }
 }

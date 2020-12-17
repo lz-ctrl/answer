@@ -2,8 +2,10 @@ package com.answer.api.security;
 
 import com.answer.api.entity.User;
 import com.answer.api.service.UserService;
+import com.answer.api.utils.WxUtil;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,22 +39,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * 只支持手机号码登录
      *
-     * @param phone
+     * @param code
      * @return
      * @throws UsernameNotFoundException
      */
     @Override
-    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String code) throws UsernameNotFoundException {
 
-        if (NONE_USERNAME.equals(phone)) {
-            throw new BadCredentialsException("手机号为空");
+        if (NONE_USERNAME.equals(code)) {
+            throw new BadCredentialsException("code为空");
         }
-        User userEntity = userService.findUserByPhone(phone);
-
+        String openId= WxUtil.getOpenIdByCode(code);
+        /*if(openId==null){
+            throw new BadCredentialsException("openId获取失败");
+        }*/
+        User userEntity = userService.findUserByOpenId("123");
         if (userEntity == null) {
             throw new BadCredentialsException("账号不存在");
         }
         LinkedList<GrantedAuthority> linkedList = new LinkedList<>();
+        /**
+         * 没有多级权限管理,直接为默认用户
+         */
+        linkedList.add(new SimpleGrantedAuthority(ROLE));
 
         return new SecurityUser(userEntity.getId(), userEntity.getPhone(), userEntity.getPassword(), linkedList);
 

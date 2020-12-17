@@ -1,6 +1,5 @@
 package com.answer.api.entity;
 
-import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,17 +11,17 @@ public class AnswerInformation implements Serializable {
 
     private Integer score;
 
-    private Integer user_id;
+    private Integer userId;
 
-    private Integer tiger_score;
+    private Integer tigerScore;
 
-    private Integer peacock_score;
+    private Integer peacockScore;
 
-    private Integer koala_score;
+    private Integer koalaScore;
 
-    private Integer owl_score;
+    private Integer owlScore;
 
-    private Integer lizard_score;
+    private Integer lizardScore;
 
     private Date date;
 

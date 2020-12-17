@@ -20,9 +20,9 @@ public final class ConstantUtils {
      **/
     public static final String TOKEN_ROLE_CLAIMS = "rol";
     /**
-     * 过期时间10分钟
+     * 过期时间1天
      */
-    public final static long TOKEN_EXPIRE_TIME = 10 * 60 * 1000;
+    public final static long TOKEN_EXPIRE_TIME = 24 * 60 * 60 * 1000;
 
     /*提示*/
     /**

@@ -14,13 +14,12 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @TableName("tb_answer")
 public class Answer implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     private String questions;
-    @TableField(exist = false)
-    private Option option;
 
     private String a;
 
@@ -44,7 +43,10 @@ public class Answer implements Serializable {
 
     private Integer type;
 
-    private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    private Option option;
+
+
 
 
 

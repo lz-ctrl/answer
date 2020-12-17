@@ -49,11 +49,11 @@ public class AnswerController {
 
     @ApiOperation(value = "完成题目结算(传对象数组)", notes = "10道题目答完提交")
     @PostMapping("complete")
-    public RestApiResult<AnswerInformation> complete(@RequestBody List<AnswerDto> list){
+    public RestApiResult<AnswerInformation> complete(@RequestBody List<AnswerDto> list,@RequestParam("user_id")Integer titleId){
         if(list.size()<=0){
             throw new ServiceException(RestCode.BAD_REQUEST_408);
         }
-        return new RestApiResult<>(RestCode.SUCCESS, answerService.complete(list));
+        return new RestApiResult<>(RestCode.SUCCESS, answerService.complete(list,titleId));
     }
     @ApiOperation(value = "所以题目提交", notes = "所以题目提交")
     @PostMapping("submit")

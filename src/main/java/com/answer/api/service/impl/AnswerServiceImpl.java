@@ -271,4 +271,11 @@ public class AnswerServiceImpl implements AnswerService{
         //TODO 方法最后插入用户记录表
         return completeVo;
     }
+
+    @Override
+    public Character submit(Integer userId) {
+        //查询出用户记录的分数
+        //把各项分数求和 计算最大值
+        return null;
+    }
 }

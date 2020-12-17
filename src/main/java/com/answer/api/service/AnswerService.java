@@ -32,4 +32,6 @@ public interface AnswerService {
      * @return
      */
     CompleteVo complete(List<AnswerDto> list);
+
+    Character submit(Integer userId);
 }

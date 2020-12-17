@@ -46,12 +46,20 @@ public class AnswerController {
     }
 
 
-    @ApiOperation(value = "完成题目结算(传对象数组)", notes = "所有题目答完提交")
+    @ApiOperation(value = "完成题目结算(传对象数组)", notes = "10道题目答完提交")
     @PostMapping("complete")
     public RestApiResult<CompleteVo> complete(@RequestBody List<AnswerDto> list){
         if(list.size()<=0){
             throw new ServiceException(RestCode.BAD_REQUEST_408);
         }
         return new RestApiResult<>(RestCode.SUCCESS, answerService.complete(list));
+    }
+    @ApiOperation(value = "所以题目提交", notes = "所以题目提交")
+    @PostMapping("submit")
+    public RestApiResult submit(@RequestParam("user_id") Integer userId){
+        if(userId==null){
+            throw new ServiceException(RestCode.BAD_REQUEST_403,"用户id不能为空");
+        }
+        return new RestApiResult<>(RestCode.SUCCESS, answerService.submit(userId));
     }
 }

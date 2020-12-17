@@ -6,7 +6,6 @@ import com.answer.api.entity.Option;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.service.AnswerService;
-import com.answer.api.utils.BeanMapper;
 import com.answer.api.vo.CompleteVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -28,6 +27,8 @@ public class AnswerServiceImpl implements AnswerService{
     private AnswerMapper answerMapper;
     @Autowired
     private AnswerInformationMapper answerInformationMapper;
+    @Autowired
+    private CharacterAnalysisMapper analysisMapper;
 
     /**
      *实现用户答题
@@ -57,24 +58,24 @@ public class AnswerServiceImpl implements AnswerService{
                 //用switch判断符合条件的项
                 switch (ua){
                     case "A":
-                        //转为int计算
-                        int af = Integer.parseInt(answer1.getAf());
+                        //计算
+                        int af = answer1.getAf();
                         score=score+af;
                         break;
                     case "B":
-                        int bf = Integer.parseInt(answer1.getBf());
+                        int bf = answer1.getBf();
                         score=score+bf;
                         break;
                     case "C":
-                        int cf = Integer.parseInt(answer1.getCf());
+                        int cf = answer1.getCf();
                         score=score+cf;
                         break;
                     case "D":
-                        int df = Integer.parseInt(answer1.getDf());
+                        int df = answer1.getDf();
                         score=score+df;
                         break;
                     default:
-                        int ef = Integer.parseInt(answer1.getEf());
+                        int ef = answer1.getEf();
                         score=score+ef;
                 }
             }
@@ -132,102 +133,102 @@ public class AnswerServiceImpl implements AnswerService{
                        case "A":
                           switch (answer.getType()){
                               case 1:
-                                  tigerScore.addAndGet(Integer.parseInt(answer.getAf()));
+                                  tigerScore.addAndGet(answer.getAf());
                               break;
                               case 2:
-                                  peacockScore.addAndGet(Integer.parseInt(answer.getAf()));
+                                  peacockScore.addAndGet(answer.getAf());
                               break;
                               case 3:
-                                  koalaScore.addAndGet(Integer.parseInt(answer.getAf()));
+                                  koalaScore.addAndGet(answer.getAf());
                               break;
                               case 4:
-                                  owlScore.addAndGet(Integer.parseInt(answer.getAf()));
+                                  owlScore.addAndGet(answer.getAf());
                               break;
                               case 5:
-                                  lizardScore.addAndGet(Integer.parseInt(answer.getAf()));
+                                  lizardScore.addAndGet(answer.getAf());
                               break;
                           }
-                           score.addAndGet(Integer.parseInt(answer.getAf()));
+                           score.addAndGet(answer.getAf());
                            break;
                        case "B":
                            switch (answer.getType()){
                                case 1:
-                                   tigerScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   tigerScore.addAndGet(answer.getBf());
                                    break;
                                case 2:
-                                   peacockScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   peacockScore.addAndGet(answer.getBf());
                                    break;
                                case 3:
-                                   koalaScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   koalaScore.addAndGet(answer.getBf());
                                    break;
                                case 4:
-                                   owlScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   owlScore.addAndGet(answer.getBf());
                                    break;
                                case 5:
-                                   lizardScore.addAndGet(Integer.parseInt(answer.getBf()));
+                                   lizardScore.addAndGet(answer.getBf());
                                    break;
                            }
-                           score.addAndGet(Integer.parseInt(answer.getBf()));
+                           score.addAndGet(answer.getBf());
                            break;
                        case "C":
                            switch (answer.getType()){
                                case 1:
-                                   tigerScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   tigerScore.addAndGet(answer.getCf());
                                    break;
                                case 2:
-                                   peacockScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   peacockScore.addAndGet(answer.getCf());
                                    break;
                                case 3:
-                                   koalaScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   koalaScore.addAndGet(answer.getCf());
                                    break;
                                case 4:
-                                   owlScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   owlScore.addAndGet(answer.getCf());
                                    break;
                                case 5:
-                                   lizardScore.addAndGet(Integer.parseInt(answer.getCf()));
+                                   lizardScore.addAndGet(answer.getCf());
                                    break;
                            }
-                           score.addAndGet(Integer.parseInt(answer.getCf()));
+                           score.addAndGet(answer.getCf());
                            break;
                        case "D":
                            switch (answer.getType()){
                                case 1:
-                                   tigerScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   tigerScore.addAndGet(answer.getDf());
                                    break;
                                case 2:
-                                   peacockScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   peacockScore.addAndGet(answer.getDf());
                                    break;
                                case 3:
-                                   koalaScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   koalaScore.addAndGet(answer.getDf());
                                    break;
                                case 4:
-                                   owlScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   owlScore.addAndGet(answer.getDf());
                                    break;
                                case 5:
-                                   lizardScore.addAndGet(Integer.parseInt(answer.getDf()));
+                                   lizardScore.addAndGet(answer.getDf());
                                    break;
                            }
-                           score.addAndGet(Integer.parseInt(answer.getDf()));
+                           score.addAndGet(answer.getDf());
                            break;
                        default:
                            switch (answer.getType()){
                                case 1:
-                                   tigerScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   tigerScore.addAndGet(answer.getEf());
                                    break;
                                case 2:
-                                   peacockScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   peacockScore.addAndGet(answer.getEf());
                                    break;
                                case 3:
-                                   koalaScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   koalaScore.addAndGet(answer.getEf());
                                    break;
                                case 4:
-                                   owlScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   owlScore.addAndGet(answer.getEf());
                                    break;
                                case 5:
-                                   lizardScore.addAndGet(Integer.parseInt(answer.getEf()));
+                                   lizardScore.addAndGet(answer.getEf());
                                    break;
                            }
-                           score.addAndGet(Integer.parseInt(answer.getEf()));
+                           score.addAndGet(answer.getEf());
                    }
                }
            });
@@ -254,6 +255,8 @@ public class AnswerServiceImpl implements AnswerService{
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
+            CharacterAnalysisWithBLOBs modelId = analysisMapper.selectby(2);
+            completeVo.setModelId(modelId);
         }
         if(koalaScore.get()==arr[0]){
             System.out.println("考拉"+koalaScore);

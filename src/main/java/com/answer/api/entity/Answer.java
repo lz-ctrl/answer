@@ -1,11 +1,15 @@
 package com.answer.api.entity;
 
-import java.io.Serializable;
+import lombok.Data;
 
+import java.io.Serializable;
+@Data
 public class Answer implements Serializable {
     private Integer id;
 
     private String questions;
+
+    private Option option;
 
     private String a;
 
@@ -27,7 +31,7 @@ public class Answer implements Serializable {
 
     private Integer ef;
 
-    private Integer typeId;
+    private Integer type;
 
     private static final long serialVersionUID = 1L;
 
@@ -127,11 +131,5 @@ public class Answer implements Serializable {
         this.ef = ef;
     }
 
-    public Integer getTypeId() {
-        return typeId;
-    }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
 }

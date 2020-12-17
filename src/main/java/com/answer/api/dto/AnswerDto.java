@@ -8,6 +8,8 @@ import lombok.Data;
  */
 @Data
 public class AnswerDto {
+    @ApiModelProperty("用户id")
+    private Integer userId;
     @ApiModelProperty("答题选项 A B C D E")
     private String optionStr;
     @ApiModelProperty("题目的id")

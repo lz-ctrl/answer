@@ -3,9 +3,11 @@ package com.answer.api.mapper;
 import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.AnswerInformationExample;
 import java.util.List;
+
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface AnswerInformationMapper {
+public interface AnswerInformationMapper extends BaseMapper<CharacterAnalysis> {
     int countByExample(AnswerInformationExample example);
 
     int deleteByExample(AnswerInformationExample example);

@@ -12,7 +12,12 @@ import java.util.List;
 
 public interface AnswerService {
 
-    //答题方法
+    /**
+     *
+     * @param id
+     * @param answer
+     * @return
+     */
     Answer questionAnswering(int[] id, String[] answer);
 
     /**

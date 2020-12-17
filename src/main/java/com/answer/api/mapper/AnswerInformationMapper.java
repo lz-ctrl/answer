@@ -4,6 +4,7 @@ import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.AnswerInformationExample;
 import java.util.List;
 
+import com.answer.api.entity.CharacterAnalysis;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 

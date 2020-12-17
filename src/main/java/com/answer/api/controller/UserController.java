@@ -1,8 +1,11 @@
 package com.answer.api.controller;
 
 import com.answer.api.codec.RestApiResult;
+import com.answer.api.codec.RestCode;
 import com.answer.api.dto.UserDto;
 import com.answer.api.service.UserService;
+import com.answer.api.utils.BeanMapper;
+import com.answer.api.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,6 @@ public class UserController {
     @ApiOperation(value = "用户登录注册", notes = "用户不存在则注册(code必传)")
     @PostMapping("/login")
     public RestApiResult userLogin(@RequestBody @Validated UserDto userDto){
-        return null;
+        return new RestApiResult<>(RestCode.SUCCESS, BeanMapper.map(userService.userLogin(userDto), UserVo.class));
     }
 }

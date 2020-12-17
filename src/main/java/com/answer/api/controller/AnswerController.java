@@ -4,6 +4,7 @@ import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
+import com.answer.api.entity.AnswerInformation;
 import com.answer.api.exception.ServiceException;
 import com.answer.api.service.AnswerService;
 import com.answer.api.utils.BeanMapper;
@@ -48,7 +49,7 @@ public class AnswerController {
 
     @ApiOperation(value = "完成题目结算(传对象数组)", notes = "10道题目答完提交")
     @PostMapping("complete")
-    public RestApiResult<CompleteVo> complete(@RequestBody List<AnswerDto> list){
+    public RestApiResult<AnswerInformation> complete(@RequestBody List<AnswerDto> list){
         if(list.size()<=0){
             throw new ServiceException(RestCode.BAD_REQUEST_408);
         }

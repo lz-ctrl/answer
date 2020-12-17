@@ -2,6 +2,7 @@ package com.answer.api.service;
 
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
+import com.answer.api.entity.AnswerInformation;
 import com.answer.api.vo.CompleteVo;
 
 import java.util.List;
@@ -31,7 +32,12 @@ public interface AnswerService {
      * @param list
      * @return
      */
-    CompleteVo complete(List<AnswerDto> list);
+    AnswerInformation complete(List<AnswerDto> list);
 
-    Character submit(Integer userId);
+    /**
+     * 提交题目
+     * @param userId
+     * @return
+     */
+    CompleteVo submit(Integer userId);
 }

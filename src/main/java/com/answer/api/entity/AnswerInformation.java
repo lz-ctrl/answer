@@ -1,6 +1,5 @@
 package com.answer.api.entity;
 
-import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;

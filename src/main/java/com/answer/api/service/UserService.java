@@ -8,7 +8,17 @@ import com.answer.api.entity.User;
  */
 public interface UserService {
 
+    /**
+     * 用户登录注册
+     * @param userDto
+     * @return
+     */
     User userLogin(UserDto userDto);
 
-
+    /**
+     * openId获取用户信息
+     * @param openId
+     * @return
+     */
+    User findUserByOpenId(String openId);
 }

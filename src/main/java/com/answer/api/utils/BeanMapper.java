@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author lz
  */
-public class BeanMapper {
+public class BeanMapper<T> {
 
     private static MapperFacade mapper;
 

@@ -25,7 +25,7 @@ public class TitleController {
 
     @PostMapping("findAll")
     @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
-    public RestApiResult<List<Title>> findAill(){
+    public RestApiResult<List<Title>> findAll(){
         return new RestApiResult<>(RestCode.SUCCESS,titleService.findAll());
     }
 }

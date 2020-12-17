@@ -256,6 +256,8 @@ public class AnswerServiceImpl implements AnswerService{
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
+           // CharacterAnalysisWithBLOBs modelId = analysisMapper.selectby(2);
+           // completeVo.setModelId(modelId);
         }
         if(koalaScore.get()==arr[0]){
             System.out.println("考拉"+koalaScore);

@@ -109,7 +109,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public AnswerInformation complete(List<AnswerDto> list,Integer titleId) {
+    public AnswerInformation complete(List<AnswerDto> list,Integer titleId,Integer userId) {
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();
         //老虎的分数
@@ -245,6 +245,8 @@ public class AnswerServiceImpl implements AnswerService{
         });
         System.out.println("最终得分>>>>>>>>>>>>>"+score);
         AnswerInformation answerInformation = new AnswerInformation();
+        List<AnswerInformation> answerInformationList=answerInformationMapper.selectList(
+                new EntityWrapper<AnswerInformation>().eq("user_id",userId).eq("title_id",titleId));
         //TODO 方法最后插入用户记录表
         answerInformation.setScore(score.get());
         answerInformation.setTigerScore(tigerScore.get());
@@ -252,9 +254,18 @@ public class AnswerServiceImpl implements AnswerService{
         answerInformation.setKoalaScore(koalaScore.get());
         answerInformation.setOwlScore(owlScore.get());
         answerInformation.setLizardScore(lizardScore.get());
-        Integer ins = answerInformationMapper.insert(answerInformation);
-        if (ins == 0 || ins == null){
-            throw new ServiceException(RestCode.EX_HANDLER_302);
+        answerInformation.setUserId(userId);
+        if(answerInformationList.size()<=0){
+            Integer ins = answerInformationMapper.insert(answerInformation);
+            if (ins == 0 || ins == null){
+                throw new ServiceException(RestCode.EX_HANDLER_302);
+            }
+        }else{
+            Integer ins = answerInformationMapper.update(answerInformation
+                    ,new EntityWrapper<AnswerInformation>().eq("id",answerInformationList.get(0).getId()));
+            if (ins == 0 || ins == null){
+                throw new ServiceException(RestCode.EX_HANDLER_302);
+            }
         }
         return answerInformation;
     }

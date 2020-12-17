@@ -1,7 +1,10 @@
 package com.answer.api.service;
 
+import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
-import com.answer.api.vo.AnswerVo;
+import com.answer.api.vo.CompleteVo;
+
+import java.util.List;
 
 /**
  * @author yjj
@@ -9,12 +12,19 @@ import com.answer.api.vo.AnswerVo;
 
 public interface AnswerService {
 
+    //答题方法
+    Answer questionAnswering(int[] id, String[] answer);
+
     /**
-     *
-     * @param id
-     * @param answer
+     * 查询所以答题
      * @return
-     * 获取用户答题的题号和选项进行匹配
      */
-    AnswerVo questionAnswering(int[] id, String[] answer);
+    List<Answer> findAll(Integer page,Integer size);
+
+    /**
+     * 结算题目
+     * @param list
+     * @return
+     */
+    CompleteVo complete(List<AnswerDto> list);
 }

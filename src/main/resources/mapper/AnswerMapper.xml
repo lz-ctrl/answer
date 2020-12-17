@@ -332,4 +332,16 @@
       type_id = #{typeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findByIds" resultType="com.answer.api.entity.Answer">
+    select * from tb_answer
+    <where>
+      id  in
+    <foreach  item="item" index="index" collection="list"
+                            open="(" separator="," close=" )">
+      #{item}
+    </foreach>
+    </where>
+  </select>
 </mapper>

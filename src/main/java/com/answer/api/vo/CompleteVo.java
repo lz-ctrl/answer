@@ -13,4 +13,6 @@ public class CompleteVo {
     private Character character;
     @ApiModelProperty("模板id")
     private Integer modelId;
+
+    CharacterAnalysis characterAnalysis;
 }

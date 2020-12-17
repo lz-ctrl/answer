@@ -2,7 +2,6 @@ package com.answer.api.mapper;
 
 import com.answer.api.entity.CharacterAnalysis;
 import com.answer.api.entity.CharacterAnalysisExample;
-import com.answer.api.entity.CharacterAnalysisWithBLOBs;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,25 +12,19 @@ public interface CharacterAnalysisMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(CharacterAnalysisWithBLOBs record);
+    int insert(CharacterAnalysis record);
 
-    int insertSelective(CharacterAnalysisWithBLOBs record);
-
-    List<CharacterAnalysisWithBLOBs> selectByExampleWithBLOBs(CharacterAnalysisExample example);
+    int insertSelective(CharacterAnalysis record);
 
     List<CharacterAnalysis> selectByExample(CharacterAnalysisExample example);
 
-    CharacterAnalysisWithBLOBs selectByPrimaryKey(Integer id);
+    CharacterAnalysis selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") CharacterAnalysisWithBLOBs record, @Param("example") CharacterAnalysisExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") CharacterAnalysisWithBLOBs record, @Param("example") CharacterAnalysisExample example);
+    int updateByExampleSelective(@Param("record") CharacterAnalysis record, @Param("example") CharacterAnalysisExample example);
 
     int updateByExample(@Param("record") CharacterAnalysis record, @Param("example") CharacterAnalysisExample example);
 
-    int updateByPrimaryKeySelective(CharacterAnalysisWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(CharacterAnalysisWithBLOBs record);
+    int updateByPrimaryKeySelective(CharacterAnalysis record);
 
     int updateByPrimaryKey(CharacterAnalysis record);
 }

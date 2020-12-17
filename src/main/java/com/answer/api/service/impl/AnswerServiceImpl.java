@@ -5,6 +5,7 @@ import com.answer.api.entity.Answer;
 import com.answer.api.entity.Option;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
+import com.answer.api.mapper.CharacterAnalysisMapper;
 import com.answer.api.service.AnswerService;
 import com.answer.api.vo.CompleteVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -255,8 +256,6 @@ public class AnswerServiceImpl implements AnswerService{
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
-            CharacterAnalysisWithBLOBs modelId = analysisMapper.selectby(2);
-            completeVo.setModelId(modelId);
         }
         if(koalaScore.get()==arr[0]){
             System.out.println("考拉"+koalaScore);

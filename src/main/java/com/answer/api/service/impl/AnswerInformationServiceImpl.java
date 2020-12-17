@@ -24,7 +24,7 @@ public class AnswerInformationServiceImpl implements AnswerInformationService {
      */
     @Override
     public int getPoints(int id) {
-        AnswerInformation information = answerInformationMapper.selectByPrimaryKey(id);
+        AnswerInformation information = answerInformationMapper.selectById(id);
         //如果获取到信息
         if (information != null){
             //获取分数并返回

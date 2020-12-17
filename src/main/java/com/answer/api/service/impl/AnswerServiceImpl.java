@@ -54,7 +54,7 @@ public class AnswerServiceImpl implements AnswerService{
         //前端传过来用户的题号和答案
         for (int i: id) {
             //根据题目id查找题目的所有信息(id，问题，选项，分值)
-            Answer answer1 = answerMapper.selectByPrimaryKey(i);
+            Answer answer1 = answerMapper.selectById(i);
             //循环用户的答案，获得选项
             for (String ua: answer) {
                 //用switch判断符合条件的项
@@ -91,7 +91,6 @@ public class AnswerServiceImpl implements AnswerService{
     @Override
     public List<Answer> findAll(Integer page,Integer size) {
         Page<Answer> pages=new Page<>(page, size);
-        System.out.println(page+"--------"+size);
         List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<>());
         list.forEach(answer -> {
             Option option=new Option();
@@ -149,6 +148,7 @@ public class AnswerServiceImpl implements AnswerService{
                               case 5:
                                   lizardScore.addAndGet(answer.getAf());
                               break;
+                              default:
                           }
                            score.addAndGet(answer.getAf());
                            break;
@@ -169,6 +169,7 @@ public class AnswerServiceImpl implements AnswerService{
                                case 5:
                                    lizardScore.addAndGet(answer.getBf());
                                    break;
+                               default:
                            }
                            score.addAndGet(answer.getBf());
                            break;
@@ -189,6 +190,7 @@ public class AnswerServiceImpl implements AnswerService{
                                case 5:
                                    lizardScore.addAndGet(answer.getCf());
                                    break;
+                               default:
                            }
                            score.addAndGet(answer.getCf());
                            break;
@@ -209,6 +211,7 @@ public class AnswerServiceImpl implements AnswerService{
                                case 5:
                                    lizardScore.addAndGet(answer.getDf());
                                    break;
+                               default:
                            }
                            score.addAndGet(answer.getDf());
                            break;
@@ -229,6 +232,7 @@ public class AnswerServiceImpl implements AnswerService{
                                case 5:
                                    lizardScore.addAndGet(answer.getEf());
                                    break;
+                               default:
                            }
                            score.addAndGet(answer.getEf());
                    }
@@ -267,7 +271,6 @@ public class AnswerServiceImpl implements AnswerService{
             owlScore.addAndGet(answerInformation.getOwlScore());
             lizardScore.addAndGet(answerInformation.getLizardScore());
         });
-
         //这里开始比较最高分 表示用户属于哪种类型
         Integer []arr={tigerScore.get(),peacockScore.get(),koalaScore.get(),owlScore.get(),lizardScore.get()};
         //使用冒泡排序法将最大的得分放在第一个
@@ -286,23 +289,23 @@ public class AnswerServiceImpl implements AnswerService{
         if(tigerScore.get()==arr[0]){
             System.out.println("老虎"+tigerScore);
             //TODO 这里要查询出模板数据塞入Vo
-            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(1));
+            completeVo.setCharacterAnalysis(analysisMapper.selectById(1));
         }
         if(peacockScore.get()==arr[0]){
             System.out.println("孔雀"+peacockScore);
-            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(2));
+            completeVo.setCharacterAnalysis(analysisMapper.selectById(2));
         }
         if(koalaScore.get()==arr[0]){
             System.out.println("考拉"+koalaScore);
-            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(3));
+            completeVo.setCharacterAnalysis(analysisMapper.selectById(3));
         }
         if(owlScore.get()==arr[0]){
             System.out.println("猫头鹰"+owlScore);
-            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(4));
+            completeVo.setCharacterAnalysis(analysisMapper.selectById(4));
         }
         if(lizardScore.get()==arr[0]){
             System.out.println("变色龙"+lizardScore);
-            completeVo.setCharacterAnalysis(analysisMapper.selectByPrimaryKey(5));
+            completeVo.setCharacterAnalysis(analysisMapper.selectById(5));
         }
         return completeVo;
     }

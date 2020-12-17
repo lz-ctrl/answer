@@ -57,11 +57,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        // 从请求的 POST 中拿取 username 和 password 两个字段进行登入
-        String username = request.getParameter("username");
+        // 从请求的 POST 中拿取 code 和 password 两个字段进行登入
+        String username = request.getParameter("code");
+        // 小程序不需要密码，直接默认为123
         String password = request.getParameter("password");
         if (StringUtils.isBlank(password)) {
-            password = "";
+            password = "123";
         }
 
         UsernamePasswordAuthenticationToken token;
@@ -105,7 +106,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             String token = ConstantUtils.TOKEN_PREFIX + JwtUtil.sign(user.getId(), user.getUsername(),
                                                                      user.getPassword(), expireDate, user.getAuthorities());
-            restApiResult.setMsg("登入成功");
+            restApiResult.setMsg("token获取成功");
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("token", token);
             //TODO 可以添加更多返回信息

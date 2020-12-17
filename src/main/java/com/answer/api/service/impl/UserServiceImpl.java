@@ -68,6 +68,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByOpenId(String openId) {
-        return null;
+        return userMapper.findUserByOpenId(openId);
     }
 }

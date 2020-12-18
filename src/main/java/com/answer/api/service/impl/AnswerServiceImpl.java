@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -255,6 +256,8 @@ public class AnswerServiceImpl implements AnswerService{
         answerInformation.setOwlScore(owlScore.get());
         answerInformation.setLizardScore(lizardScore.get());
         answerInformation.setUserId(userId);
+        answerInformation.setTitleId(titleId);
+        answerInformation.setDate(new Date());
         if(answerInformationList.size()<=0){
             Integer ins = answerInformationMapper.insert(answerInformation);
             if ( ins == null|| ins == 0 ){

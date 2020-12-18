@@ -2,6 +2,7 @@ package com.answer.api.controller;
 
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
+import com.answer.api.dto.AnswerAllDto;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
 import com.answer.api.entity.AnswerInformation;
@@ -13,7 +14,9 @@ import com.answer.api.vo.CompleteVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,8 +53,10 @@ public class AnswerController {
 
     @ApiOperation(value = "完成题目结算(传对象数组)", notes = "10道题目答完提交")
     @PostMapping("complete")
-    public RestApiResult<AnswerInformation> complete(@RequestBody List<AnswerDto> list,@RequestParam("title_id")Integer titleId
-            ,@RequestParam("user_id")Integer userId){
+    public RestApiResult<AnswerInformation> complete(@RequestBody()AnswerAllDto answerAllDto){
+        Integer titleId=answerAllDto.getTitleId();
+        Integer userId=answerAllDto.getUserId();
+        List<AnswerDto> list=answerAllDto.getList();
         if(list.size()<=0){
             throw new ServiceException(RestCode.BAD_REQUEST_408);
         }
@@ -60,11 +65,11 @@ public class AnswerController {
 
 
     @ApiOperation(value = "所以题目提交", notes = "所以题目提交")
-    @PostMapping("submit")
-    public RestApiResult submit(@RequestParam("user_id") Integer userId){
-        if(userId==null){
+    @GetMapping("submit/{id}")
+    public RestApiResult submit(@PathVariable Integer id){
+        if(id==null){
             throw new ServiceException(RestCode.BAD_REQUEST_403,"用户id不能为空");
         }
-        return new RestApiResult<>(RestCode.SUCCESS, answerService.submit(userId));
+        return new RestApiResult<>(RestCode.SUCCESS, answerService.submit(id));
     }
 }

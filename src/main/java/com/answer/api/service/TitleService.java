@@ -1,8 +1,8 @@
 package com.answer.api.service;
 
 import com.answer.api.entity.Title;
+import com.answer.api.vo.TitleVo;
 
-import java.util.List;
 
 /**
  * @author YinJunjie
@@ -11,16 +11,11 @@ import java.util.List;
 public interface TitleService {
 
     /**
-     * 获取所有副标题
-     * @return
-     */
-    List<Title> findAll();
-
-    /**
-     * 获取副标题内题目状态
+     * 获取所有副标题及其状态
      * @param user_id
      * @param title_id
      * @return
      */
-    boolean titleMode(Integer user_id,Integer title_id);
+    TitleVo findAll(Integer user_id, Integer title_id);
+
 }

@@ -63,7 +63,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          */
         linkedList.add(new SimpleGrantedAuthority(ROLE));
 
-        return new SecurityUser(userEntity.getId(), userEntity.getPhone(), userEntity.getPassword(), linkedList);
+        return new SecurityUser(userEntity.getId(), userEntity.getOpenId(), userEntity.getPassword(), linkedList);
 
     }
 }

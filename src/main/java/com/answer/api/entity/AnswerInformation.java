@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tb_answerInformation")
+@TableName("tb_answer_information")
 public class AnswerInformation implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)

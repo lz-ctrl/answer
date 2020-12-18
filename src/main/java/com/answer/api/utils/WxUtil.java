@@ -9,9 +9,9 @@ import lombok.extern.java.Log;
 @Log
 public class WxUtil {
 
-    private static final String APPID="wx370c238bee33c668";
+    private static final String APPID="wx5d449646cc1713fb";
 
-    private static final String SECRET="79306d329b2248f4ae6d6733311b27cd";
+    private static final String SECRET="cf769f4c9b4a6c75af5209a8da6ed331";
 
     /**
      * 根据code获取用户openid

@@ -25,7 +25,7 @@ public interface AnswerService {
      * 查询所以答题
      * @return
      */
-    List<Answer> findAll(Integer page,Integer size);
+    List<Answer> findAll(Integer page,Integer size,Integer titleId);
 
     /**
      * 结算题目

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -93,9 +94,12 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public List<Answer> findAll(Integer page,Integer size) {
+    public List<Answer> findAll(Integer page,Integer size,Integer titleId) {
+        if(titleId==null){
+            throw new ServiceException(RestCode.BAD_REQUEST_403,"title_id不能为空");
+        }
         Page<Answer> pages=new Page<>(page, size);
-        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<>());
+        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<Answer>().eq("title_id",titleId));
         list.forEach(answer -> {
             Option option=new Option();
             option.setA(answer.getA());
@@ -255,6 +259,8 @@ public class AnswerServiceImpl implements AnswerService{
         answerInformation.setOwlScore(owlScore.get());
         answerInformation.setLizardScore(lizardScore.get());
         answerInformation.setUserId(userId);
+        answerInformation.setTitleId(titleId);
+        answerInformation.setDate(new Date());
         if(answerInformationList.size()<=0){
             Integer ins = answerInformationMapper.insert(answerInformation);
             if ( ins == null|| ins == 0 ){

@@ -1,6 +1,10 @@
 server:
   port: 6377
   address: 0.0.0.0
+  ssl:
+    key-store: classpath:4889133_www.superdaheng.com.pfx
+    key-store-password: zn51C4VO
+    key-store-type: PKCS12
 
 spring:
   mvc:
@@ -37,5 +41,5 @@ mybatis-plus.configuration.map-underscore-to-camel-case: true
 mybatis-plus.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #微信相关配置
 WeiXin:
-  appId: wx370c238bee33c668
-  appSecret: 79306d329b2248f4ae6d6733311b27cd
+  appId: wx5d449646cc1713fb
+  appSecret: cf769f4c9b4a6c75af5209a8da6ed331

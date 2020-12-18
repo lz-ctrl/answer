@@ -42,8 +42,9 @@ public class AnswerController {
     @ApiOperation(value = "查询所有题目", notes = "查询所有题目")
     @GetMapping("list")
     public RestApiResult<List<AnswerVo>> list(@RequestParam(value = "page",defaultValue = "0")Integer page,
-                                              @RequestParam(value = "size",defaultValue = "30")Integer size){
-        return new RestApiResult<>(RestCode.SUCCESS, BeanMapper.mapList(answerService.findAll(page,size),AnswerVo.class));
+                                              @RequestParam(value = "size",defaultValue = "30")Integer size,
+                                              @RequestParam(value = "title_id")Integer titleId){
+        return new RestApiResult<>(RestCode.SUCCESS, BeanMapper.mapList(answerService.findAll(page,size,titleId),AnswerVo.class));
     }
 
 

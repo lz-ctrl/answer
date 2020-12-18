@@ -94,9 +94,12 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public List<Answer> findAll(Integer page,Integer size) {
+    public List<Answer> findAll(Integer page,Integer size,Integer titleId) {
+        if(titleId==null){
+            throw new ServiceException(RestCode.BAD_REQUEST_403,"title_id不能为空");
+        }
         Page<Answer> pages=new Page<>(page, size);
-        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<>());
+        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<Answer>().eq("title_id",titleId));
         list.forEach(answer -> {
             Option option=new Option();
             option.setA(answer.getA());

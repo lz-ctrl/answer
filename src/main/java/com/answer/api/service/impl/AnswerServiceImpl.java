@@ -257,13 +257,13 @@ public class AnswerServiceImpl implements AnswerService{
         answerInformation.setUserId(userId);
         if(answerInformationList.size()<=0){
             Integer ins = answerInformationMapper.insert(answerInformation);
-            if (ins == 0 || ins == null){
+            if ( ins == null|| ins == 0 ){
                 throw new ServiceException(RestCode.EX_HANDLER_302);
             }
         }else{
             Integer ins = answerInformationMapper.update(answerInformation
                     ,new EntityWrapper<AnswerInformation>().eq("id",answerInformationList.get(0).getId()));
-            if (ins == 0 || ins == null){
+            if ( ins == null|| ins == 0 ){
                 throw new ServiceException(RestCode.EX_HANDLER_302);
             }
         }
@@ -275,6 +275,9 @@ public class AnswerServiceImpl implements AnswerService{
         //查询出用户记录的分数
         //把各项分数求和 计算最大值
         List<AnswerInformation> list=answerInformationMapper.selectList(new EntityWrapper<AnswerInformation>().eq("user_id",userId));
+        if(list.size()<=0){
+            throw new ServiceException(RestCode.BAD_REQUEST_409,"用户没有答题信息");
+        }
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();
         //老虎的分数

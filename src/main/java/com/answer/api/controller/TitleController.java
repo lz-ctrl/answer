@@ -2,6 +2,7 @@ package com.answer.api.controller;
 
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
+import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.Title;
 import com.answer.api.service.TitleService;
 import io.swagger.annotations.Api;
@@ -29,5 +30,11 @@ public class TitleController {
     @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
     public RestApiResult<List<Title>> findAll(){
         return new RestApiResult<>(RestCode.SUCCESS,titleService.findAll());
+    }
+
+    @PostMapping("model")
+    @ApiOperation(value = "副标题状态",notes = "副标题状态")
+    public RestApiResult titleMode(Integer user_id,Integer title_id){
+        return new RestApiResult<>(RestCode.SUCCESS,titleService.titleMode(user_id, title_id));
     }
 }

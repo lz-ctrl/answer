@@ -10,5 +10,17 @@ import java.util.List;
  */
 public interface TitleService {
 
+    /**
+     * 获取所有副标题
+     * @return
+     */
     List<Title> findAll();
+
+    /**
+     * 获取副标题内题目状态
+     * @param user_id
+     * @param title_id
+     * @return
+     */
+    boolean titleMode(Integer user_id,Integer title_id);
 }

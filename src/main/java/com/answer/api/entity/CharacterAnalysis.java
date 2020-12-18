@@ -23,7 +23,7 @@ public class CharacterAnalysis implements Serializable {
     private String advantage;
     private String shortcoming;
     private String workStyle;
-    private String imgUrl;
+
 
 
 }

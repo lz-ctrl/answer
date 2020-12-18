@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.answer.api.mapper.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.answer.api.entity.Answer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="questions" property="questions" jdbcType="VARCHAR" />
+    <result column="A" property="a" jdbcType="VARCHAR" />
+    <result column="B" property="b" jdbcType="VARCHAR" />
+    <result column="C" property="c" jdbcType="VARCHAR" />
+    <result column="D" property="d" jdbcType="VARCHAR" />
+    <result column="E" property="e" jdbcType="VARCHAR" />
+    <result column="AF" property="af" jdbcType="INTEGER" />
+    <result column="BF" property="bf" jdbcType="INTEGER" />
+    <result column="CF" property="cf" jdbcType="INTEGER" />
+    <result column="DF" property="df" jdbcType="INTEGER" />
+    <result column="EF" property="ef" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="findByIds" resultType="com.answer.api.entity.Answer">
+    select * from tb_answer
+    <where>
+      id  in
+    <foreach  item="item" index="index" collection="list"
+                            open="(" separator="," close=" )">
+      #{item}
+    </foreach>
+    </where>
+  </select>
+</mapper>

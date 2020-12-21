@@ -1,5 +1,6 @@
 package com.answer.api.vo;
 
+import com.answer.api.entity.Title;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -17,24 +18,14 @@ public class TitleVo {
     @ApiModelProperty("副标题")
     private String title;
 
-    @ApiModelProperty("题目数量")
-    private int number1;
+    @ApiModelProperty("内容")
+    private String content;
 
     @ApiModelProperty("题目数量")
-    private int number2;
+    private int number;
 
-    @ApiModelProperty("题目数量")
-    private int number3;
 
     @ApiModelProperty("副标题的状态，0未作，1已作")
-    private int situation1;
+    private int situation;
 
-    @ApiModelProperty("副标题的状态，0未作，1已作")
-    private int situation2;
-
-    @ApiModelProperty("副标题的状态，0未作，1已作")
-    private int situation3;
-
-    @ApiModelProperty("所有副标题")
-    private List titleList;
 }

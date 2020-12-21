@@ -3,6 +3,8 @@ package com.answer.api.service;
 import com.answer.api.dto.TitleDto;
 import com.answer.api.vo.TitleVo;
 
+import java.util.List;
+
 
 /**
  * @author YinJunjie
@@ -15,6 +17,6 @@ public interface TitleService {
      * @param tItleDto
      * @return
      */
-    TitleVo findAll(TitleDto tItleDto);
+    List<TitleVo> findAll(TitleDto tItleDto);
 
 }

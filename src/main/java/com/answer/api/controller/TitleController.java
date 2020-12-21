@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author YinJunjie
  * @date 2020-12-17 14:44
@@ -26,7 +28,7 @@ public class TitleController {
 
     @PostMapping("list")
     @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
-    public RestApiResult<TitleVo> findAll(TitleDto tItleDto){
-        return new RestApiResult<TitleVo>(RestCode.SUCCESS,titleService.findAll(tItleDto));
+    public RestApiResult<List<TitleVo>> findAll(TitleDto tItleDto){
+        return new RestApiResult<>(RestCode.SUCCESS,titleService.findAll(tItleDto));
     }
 }

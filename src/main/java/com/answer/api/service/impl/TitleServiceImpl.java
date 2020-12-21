@@ -47,7 +47,7 @@ public class TitleServiceImpl implements TitleService {
             TitleVo titleVo = new TitleVo();
             List<AnswerInformation> userInfo = answerInformationMapper
                     .selectList(new EntityWrapper<AnswerInformation>()
-                      .eq("user_Id", titleDto.getUser_id())
+                      .eq("user_id", titleDto.getUser_id())
                       .eq("title_id",title.getId()));
             if(userInfo.size()<=0){
                 titleVo.setSituation(0);
@@ -58,6 +58,7 @@ public class TitleServiceImpl implements TitleService {
             titleVo.setNumber(num);
             titleVo.setContent(title.getContent());
             titleVo.setTitle(title.getTitle());
+            titleVo.setId(title.getId());
             titleVos.add(titleVo);
         });
         return titleVos;

@@ -1,6 +1,6 @@
 package com.answer.api.service;
 
-import com.answer.api.entity.Title;
+import com.answer.api.dto.TitleDto;
 import com.answer.api.vo.TitleVo;
 
 
@@ -12,10 +12,9 @@ public interface TitleService {
 
     /**
      * 获取所有副标题及其状态
-     * @param user_id
-     * @param title_id
+     * @param tItleDto
      * @return
      */
-    TitleVo findAll(Integer user_id, Integer title_id);
+    TitleVo findAll(TitleDto tItleDto);
 
 }

@@ -2,6 +2,7 @@ package com.answer.api.controller;
 
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
+import com.answer.api.dto.TitleDto;
 import com.answer.api.service.TitleService;
 import com.answer.api.vo.TitleVo;
 import io.swagger.annotations.Api;
@@ -25,13 +26,7 @@ public class TitleController {
 
     @PostMapping("list")
     @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
-    public RestApiResult<TitleVo> findAll(Integer user_id, Integer title_id){
-        return new RestApiResult<TitleVo>(RestCode.SUCCESS,titleService.findAll(user_id,title_id));
+    public RestApiResult<TitleVo> findAll(TitleDto tItleDto){
+        return new RestApiResult<TitleVo>(RestCode.SUCCESS,titleService.findAll(tItleDto));
     }
-
-//    @PostMapping("model")
-//    @ApiOperation(value = "副标题状态",notes = "副标题状态")
-//    public RestApiResult titleMode(Integer user_id,Integer title_id){
-//        return new RestApiResult<Title>(RestCode.SUCCESS,titleService.titleMode(user_id, title_id));
-//    }
 }

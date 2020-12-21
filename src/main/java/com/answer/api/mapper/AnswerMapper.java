@@ -15,5 +15,4 @@ public interface AnswerMapper extends BaseMapper<Answer> {
      */
     List<Answer> findByIds(List<Integer> list);
 
-
 }

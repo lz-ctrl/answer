@@ -14,9 +14,9 @@ public interface TitleService {
 
     /**
      * 获取所有副标题及其状态
-     * @param tItleDto
+     * @param userId
      * @return
      */
-    List<TitleVo> findAll(TitleDto tItleDto);
+    List<TitleVo> findAll(Integer userId);
 
 }

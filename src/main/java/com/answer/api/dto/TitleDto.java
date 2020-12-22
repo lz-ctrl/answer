@@ -11,5 +11,5 @@ import lombok.Data;
 public class TitleDto {
 
     @ApiModelProperty("用户ID")
-    private Integer user_id;
+    private Integer userId;
 }

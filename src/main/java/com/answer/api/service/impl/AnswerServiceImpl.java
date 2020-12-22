@@ -120,7 +120,7 @@ public class AnswerServiceImpl implements AnswerService{
         AtomicInteger tigerScore = new AtomicInteger();
         //孔雀的分数
         AtomicInteger peacockScore = new AtomicInteger();
-        //考拉的分数
+        //考拉的分  数
         AtomicInteger koalaScore = new AtomicInteger();
         //猫头鹰的分数
         AtomicInteger owlScore = new AtomicInteger();

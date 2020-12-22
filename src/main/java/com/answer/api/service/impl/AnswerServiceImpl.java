@@ -2,17 +2,15 @@ package com.answer.api.service.impl;
 
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerDto;
-import com.answer.api.entity.Answer;
-import com.answer.api.entity.AnswerInformation;
-import com.answer.api.entity.Option;
+import com.answer.api.entity.*;
 import com.answer.api.exception.ServiceException;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.mapper.CharacterAnalysisMapper;
+import com.answer.api.mapper.TitleMapper;
 import com.answer.api.service.AnswerService;
 import com.answer.api.utils.BeanUtil;
-import com.answer.api.vo.AnswerInformationVo;
-import com.answer.api.vo.CompleteVo;
+import com.answer.api.vo.*;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import net.bytebuddy.implementation.bytecode.Throw;
@@ -37,6 +35,8 @@ public class AnswerServiceImpl implements AnswerService{
     private AnswerInformationMapper answerInformationMapper;
     @Autowired
     private CharacterAnalysisMapper analysisMapper;
+    @Autowired
+    private TitleMapper titleMapper;
 
     /**
      *实现用户答题
@@ -360,9 +360,12 @@ public class AnswerServiceImpl implements AnswerService{
      * 删除题目
      */
     @Override
-    public int delete(Integer id) {
-
-        return 0;
+    public Integer delete(Integer id) {
+        //id不能为空
+        if (id == null) {
+            throw new ServiceException(RestCode.BAD_REQUEST_403);
+        }
+        return answerMapper.deleteById(id);
     }
 
     /**
@@ -378,6 +381,30 @@ public class AnswerServiceImpl implements AnswerService{
         BeanUtil.copyProperties(answerDto,answer);
         answerMapper.updateById(answer);
         return answer;
+    }
+
+    /**
+     * 查询所有副标题
+     * @return
+     */
+    @Override
+    public AllTitleVo findAllTitle() {
+        AllTitleVo allTitleVo = new AllTitleVo();
+        List<Title> list = titleMapper.selectList(new EntityWrapper<>());
+        allTitleVo.setAll(list);
+        return allTitleVo;
+    }
+
+    /**
+     * 查询所有性格类型
+     * @return
+     */
+    @Override
+    public AllCharacterVo findAllCharacterAnalysis() {
+        AllCharacterVo allCharacterVo = new AllCharacterVo();
+        List<CharacterAnalysis> characterAnalyses = analysisMapper.selectList(new EntityWrapper<>());
+        allCharacterVo.setAll(characterAnalyses);
+        return allCharacterVo;
     }
 
 

@@ -8,21 +8,16 @@ import com.answer.api.entity.Answer;
 import com.answer.api.entity.AnswerInformation;
 import com.answer.api.exception.ServiceException;
 import com.answer.api.service.AnswerService;
+import com.answer.api.service.TitleService;
 import com.answer.api.utils.BeanMapper;
 import com.answer.api.vo.AnswerVo;
 import com.answer.api.vo.CompleteVo;
+import com.answer.api.vo.TitleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -71,5 +66,36 @@ public class AnswerController {
             throw new ServiceException(RestCode.BAD_REQUEST_403,"用户id不能为空");
         }
         return new RestApiResult<>(RestCode.SUCCESS, answerService.submit(id));
+    }
+
+    @ApiOperation(value = "新增题目",notes = "新增题目")
+    @PostMapping()
+    public RestApiResult insert(@RequestBody @Validated AnswerDto answerDto){
+        return new RestApiResult(RestCode.SUCCESS,answerService.create(answerDto));
+    }
+
+    @ApiOperation(value = "删除题目",notes = "删除题目")
+    @DeleteMapping("{id}")
+    public RestApiResult delete(@PathVariable Integer id){
+        answerService.delete(id);
+        return new RestApiResult<>(RestCode.SUCCESS);
+    }
+
+    @ApiOperation(value = "修改题目",notes = "修改题目")
+    @PutMapping()
+    public RestApiResult update(@RequestBody @Validated AnswerDto answerDto){
+        return new RestApiResult(RestCode.SUCCESS,answerService.update(answerDto));
+    }
+
+    @ApiOperation(value = "所有副标题",notes = "所有副标题")
+    @PostMapping("title")
+    public RestApiResult findAllTitle(){
+        return new RestApiResult(RestCode.SUCCESS,answerService.findAllTitle());
+    }
+
+    @ApiOperation(value = "所有副标题",notes = "所有副标题")
+    @PostMapping("character")
+    public RestApiResult findAllCharacterVo(){
+        return new RestApiResult(RestCode.SUCCESS,answerService.findAllCharacterAnalysis());
     }
 }

@@ -27,21 +27,21 @@ public class Title {
 
     private String content;
 
-    @TableField(exist = false)
-    private int number1;
-
-    @TableField(exist = false)
-    private int number2;
-
-    @TableField(exist = false)
-    private int number3;
-
-    @TableField(exist = false)
-    private int situation1;
-
-    @TableField(exist = false)
-    private int situation2;
-
-    @TableField(exist = false)
-    private int situation3;
+//    @TableField(exist = false)
+//    private int number1;
+//
+//    @TableField(exist = false)
+//    private int number2;
+//
+//    @TableField(exist = false)
+//    private int number3;
+//
+//    @TableField(exist = false)
+//    private int situation1;
+//
+//    @TableField(exist = false)
+//    private int situation2;
+//
+//    @TableField(exist = false)
+//    private int situation3;
 }

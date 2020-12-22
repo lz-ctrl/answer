@@ -45,6 +45,8 @@ public class Answer implements Serializable {
 
     private Integer titleId;
 
+    private Integer answer_type;
+
     @TableField(exist = false)
     private Option option;
 

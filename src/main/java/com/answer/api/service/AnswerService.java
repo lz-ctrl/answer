@@ -40,4 +40,25 @@ public interface AnswerService {
      * @return
      */
     CompleteVo submit(Integer userId);
+
+    /**
+     * 新增题目
+     * @param answerDto
+     * @return
+     */
+    Answer create(AnswerDto answerDto);
+
+    /**
+     * 删除题目
+     * @param id
+     * @return
+     */
+    int delete (Integer id);
+
+    /**
+     * 修改题目
+     * @param answerDto
+     * @return
+     */
+    Answer update (AnswerDto answerDto);
 }

@@ -10,6 +10,7 @@ import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.mapper.CharacterAnalysisMapper;
 import com.answer.api.service.AnswerService;
+import com.answer.api.utils.BeanUtil;
 import com.answer.api.vo.AnswerInformationVo;
 import com.answer.api.vo.CompleteVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -342,4 +343,42 @@ public class AnswerServiceImpl implements AnswerService{
         }
         return completeVo;
     }
+
+
+    /**
+     * 新增题目
+     */
+    @Override
+    public Answer create(AnswerDto answerDto) {
+        Answer answer = new Answer();
+        BeanUtil.copyProperties(answerDto,answer);
+        answerMapper.insert(answer);
+        return answer;
+    }
+
+    /**
+     * 删除题目
+     */
+    @Override
+    public int delete(Integer id) {
+
+        return 0;
+    }
+
+    /**
+     * 修改题目
+     */
+    @Override
+    public Answer update(AnswerDto answerDto) {
+        //如果id为空
+        if (answerDto.getId() == null) {
+            throw new ServiceException(RestCode.BAD_REQUEST_403);
+        }
+        Answer answer = new Answer();
+        BeanUtil.copyProperties(answerDto,answer);
+        answerMapper.updateById(answer);
+        return answer;
+    }
+
+
 }

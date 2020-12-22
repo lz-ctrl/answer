@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author YinJunjie
@@ -45,6 +44,7 @@ public class TitleServiceImpl implements TitleService {
         List<Title> list = titleMapper.selectList(new EntityWrapper<>());
         list.forEach(title -> {
             TitleVo titleVo = new TitleVo();
+            //查询记录表，获取用户记录
             List<AnswerInformation> userInfo = answerInformationMapper
                     .selectList(new EntityWrapper<AnswerInformation>()
                       .eq("user_id", titleDto.getUser_id())

@@ -6,6 +6,7 @@ import lombok.Data;
 
 /**
  * @author lz
+ * layui专用result
  */
 @Data
 public class LayuiRespResult implements Serializable{

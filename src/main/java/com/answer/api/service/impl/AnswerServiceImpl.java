@@ -396,7 +396,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     /**
-     * 查询所有性格类型
+     * 查询所有性格类型l
      * @return
      */
     @Override

@@ -24,7 +24,6 @@ public class TitleVo {
     @ApiModelProperty("题目数量")
     private int number;
 
-
     @ApiModelProperty("副标题的状态，0未作，1已作")
     private int situation;
 

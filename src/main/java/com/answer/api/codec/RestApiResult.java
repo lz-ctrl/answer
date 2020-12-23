@@ -19,10 +19,18 @@ public class RestApiResult<T> {
     private String path;
     @ApiModelProperty(value = "返回结果")
     private T data;
-
+    @ApiModelProperty(value = "总数数")
+    private Integer count;
 
     public RestApiResult() {
 
+    }
+
+    public RestApiResult(RestCode code, T data,Integer count) {
+        this.setCode(code.code());
+        this.setMsg(code.msg());
+        this.setData(data);
+        this.setCount(count);
     }
 
     public RestApiResult(int code, String errorMsg) {
@@ -99,5 +107,11 @@ public class RestApiResult<T> {
         this.path = path;
     }
 
+    public Integer getCount() {
+        return count;
+    }
 
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

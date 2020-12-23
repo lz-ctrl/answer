@@ -383,17 +383,7 @@ public class AnswerServiceImpl implements AnswerService{
         return answer;
     }
 
-    /**
-     * 查询所有副标题
-     * @return
-     */
-    @Override
-    public AllTitleVo findAllTitle() {
-        AllTitleVo allTitleVo = new AllTitleVo();
-        List<Title> list = titleMapper.selectList(new EntityWrapper<>());
-        allTitleVo.setAll(list);
-        return allTitleVo;
-    }
+
 
     /**
      * 查询所有性格类型l

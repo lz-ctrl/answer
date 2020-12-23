@@ -1,5 +1,6 @@
 package com.answer.api.controller;
 
+import com.answer.api.codec.LayuiRespResult;
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerAllDto;
@@ -87,11 +88,7 @@ public class AnswerController {
         return new RestApiResult(RestCode.SUCCESS,answerService.update(answerDto));
     }
 
-    @ApiOperation(value = "所有副标题",notes = "所有副标题")
-    @PostMapping("title")
-    public RestApiResult findAllTitle(){
-        return new RestApiResult(RestCode.SUCCESS,answerService.findAllTitle());
-    }
+
 
     @ApiOperation(value = "所有副标题",notes = "所有副标题")
     @PostMapping("character")

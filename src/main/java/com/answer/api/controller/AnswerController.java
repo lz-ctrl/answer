@@ -13,6 +13,7 @@ import com.answer.api.service.TitleService;
 import com.answer.api.utils.BeanMapper;
 import com.answer.api.vo.AnswerVo;
 import com.answer.api.vo.CompleteVo;
+import com.answer.api.vo.PageAnswerVo;
 import com.answer.api.vo.TitleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class AnswerController {
         return null;
     }
 
-    @ApiOperation(value = "查询所有题目", notes = "查询所有题目")
+    @ApiOperation(value = "根据titleId查询所有题目", notes = "根据titleId查询所有题目")
     @GetMapping("list")
     public RestApiResult<List<AnswerVo>> list(@RequestParam(value = "page",defaultValue = "0")Integer page,
                                               @RequestParam(value = "size",defaultValue = "30")Integer size,
@@ -88,7 +89,12 @@ public class AnswerController {
         return new RestApiResult(RestCode.SUCCESS,answerService.update(answerDto));
     }
 
-
+    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @GetMapping("page")
+    public LayuiRespResult page(@RequestParam(value = "page",defaultValue = "0")Integer page,
+                                @RequestParam(value = "limit",defaultValue = "10")Integer size){
+        return answerService.page(page,size);
+    }
 
     @ApiOperation(value = "所有副标题",notes = "所有副标题")
     @PostMapping("character")

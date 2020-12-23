@@ -1,5 +1,6 @@
 package com.answer.api.service.impl;
 
+import com.answer.api.codec.LayuiRespResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.*;
@@ -111,6 +112,14 @@ public class AnswerServiceImpl implements AnswerService{
             answer.setOption(option);
         });
         return list;
+    }
+
+    @Override
+    public LayuiRespResult page(Integer page, Integer size) {
+        Page<Answer> pages=new Page<>(page, size);
+        List<Answer> list=answerMapper.selectPage(pages,new EntityWrapper<>());
+        Integer count=answerMapper.selectCount(new EntityWrapper<>());
+        return LayuiRespResult.success(list,count);
     }
 
     @Override

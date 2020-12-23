@@ -1,5 +1,6 @@
 package com.answer.api.controller;
 
+import com.answer.api.codec.LayuiRespResult;
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.TitleDto;
@@ -29,8 +30,14 @@ public class TitleController {
     private TitleService titleService;
 
     @GetMapping("list/{id}")
-    @ApiOperation(value = "查询所有副标题",notes = "查询所有副标题")
+    @ApiOperation(value = "根据userId查询副标题",notes = "根据userId查询副标题")
     public RestApiResult<List<TitleVo>> findAll(@PathVariable Integer id){
         return new RestApiResult<>(RestCode.SUCCESS,titleService.findAll(id));
+    }
+
+    @ApiOperation(value = "所有副标题",notes = "所有副标题")
+    @GetMapping()
+    public LayuiRespResult findAllTitle(){
+        return LayuiRespResult.success(titleService.findAllTitle(), 1000);
     }
 }

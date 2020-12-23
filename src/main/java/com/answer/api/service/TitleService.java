@@ -1,6 +1,7 @@
 package com.answer.api.service;
 
 import com.answer.api.dto.TitleDto;
+import com.answer.api.entity.Title;
 import com.answer.api.vo.TitleVo;
 
 import java.util.List;
@@ -19,4 +20,9 @@ public interface TitleService {
      */
     List<TitleVo> findAll(Integer userId);
 
+    /**
+     * 查询所有副标题
+     * @return
+     */
+    List<Title> findAllTitle();
 }

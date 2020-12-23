@@ -63,4 +63,14 @@ public class TitleServiceImpl implements TitleService {
         });
         return titleVos;
     }
+
+
+    /**
+     * 查询所有副标题
+     * @return
+     */
+    @Override
+    public List<Title> findAllTitle() {
+        return titleMapper.selectList(new EntityWrapper<>());
+    }
 }

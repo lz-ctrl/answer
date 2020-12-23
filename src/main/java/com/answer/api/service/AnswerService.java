@@ -3,12 +3,9 @@ package com.answer.api.service;
 import com.answer.api.dto.AnswerDto;
 import com.answer.api.entity.Answer;
 import com.answer.api.entity.AnswerInformation;
-import com.answer.api.entity.CharacterAnalysis;
 import com.answer.api.entity.Title;
 import com.answer.api.vo.AllCharacterVo;
-import com.answer.api.vo.AllTitleVo;
 import com.answer.api.vo.CompleteVo;
-import com.answer.api.vo.TitleVo;
 
 import java.util.List;
 
@@ -66,12 +63,6 @@ public interface AnswerService {
      * @return
      */
     Answer update (AnswerDto answerDto);
-
-    /**
-     * 查询所有副标题
-     * @return
-     */
-    AllTitleVo findAllTitle();
 
     /**
      * 查询所有性格类型

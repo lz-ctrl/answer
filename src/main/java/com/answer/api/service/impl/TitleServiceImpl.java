@@ -34,11 +34,12 @@ public class TitleServiceImpl implements TitleService {
     private AnswerMapper answerMapper;
 
 
-    @Override
+
     /**
      * 查询所有副标题及其状态
      */
-    public List<TitleVo> findAll(TitleDto titleDto) {
+    @Override
+    public List<TitleVo> findAll(Integer userId) {
         //初始化Vo
         List<TitleVo> titleVos=new ArrayList<>();
         //获取所有副标题
@@ -47,7 +48,7 @@ public class TitleServiceImpl implements TitleService {
             TitleVo titleVo = new TitleVo();
             List<AnswerInformation> userInfo = answerInformationMapper
                     .selectList(new EntityWrapper<AnswerInformation>()
-                      .eq("user_Id", titleDto.getUser_id())
+                      .eq("user_id", userId)
                       .eq("title_id",title.getId()));
             if(userInfo.size()<=0){
                 titleVo.setSituation(0);

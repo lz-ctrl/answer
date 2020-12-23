@@ -25,4 +25,25 @@ public interface TitleService {
      * @return
      */
     List<Title> findAllTitle();
+
+    /**
+     * 修改副标题
+     * @param titleDto
+     * @return
+     */
+    Title update (TitleDto titleDto);
+
+    /**
+     * 增加副标题
+     * @param titleDto
+     * @return
+     */
+    Title insert (TitleDto titleDto);
+
+    /**
+     * 删除副标题
+     * @param id
+     * @return
+     */
+    Integer delete (Integer id);
 }

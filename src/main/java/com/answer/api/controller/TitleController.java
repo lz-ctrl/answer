@@ -4,16 +4,14 @@ import com.answer.api.codec.LayuiRespResult;
 import com.answer.api.codec.RestApiResult;
 import com.answer.api.codec.RestCode;
 import com.answer.api.dto.TitleDto;
+import com.answer.api.entity.Title;
 import com.answer.api.service.TitleService;
 import com.answer.api.vo.TitleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,23 @@ public class TitleController {
     @GetMapping()
     public LayuiRespResult findAllTitle(){
         return LayuiRespResult.success(titleService.findAllTitle(), 1000);
+    }
+
+    @ApiOperation(value = "修改副标题",notes = "修改副标题")
+    @PutMapping()
+    public RestApiResult update(@RequestBody @Validated TitleDto titleDto){
+        return new RestApiResult(RestCode.SUCCESS,titleService.update(titleDto));
+    }
+
+    @ApiOperation(value = "添加副标题",notes = "添加副标题")
+    @PostMapping("insert")
+    public RestApiResult insert(@RequestBody @Validated TitleDto titleDto){
+       return new RestApiResult(RestCode.SUCCESS,titleService.insert(titleDto));
+    }
+
+    @ApiOperation(value = "删除副标题",notes = "删除副标题")
+    @GetMapping("{id}")
+    public RestApiResult delete(@PathVariable Integer id){
+        return new RestApiResult(RestCode.SUCCESS,titleService.delete(id));
     }
 }

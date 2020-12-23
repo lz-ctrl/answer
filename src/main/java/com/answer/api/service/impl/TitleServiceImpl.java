@@ -1,13 +1,16 @@
 package com.answer.api.service.impl;
 
+import com.answer.api.codec.RestCode;
 import com.answer.api.dto.TitleDto;
 import com.answer.api.entity.Answer;
 import com.answer.api.entity.AnswerInformation;
 import com.answer.api.entity.Title;
+import com.answer.api.exception.ServiceException;
 import com.answer.api.mapper.AnswerInformationMapper;
 import com.answer.api.mapper.AnswerMapper;
 import com.answer.api.mapper.TitleMapper;
 import com.answer.api.service.TitleService;
+import com.answer.api.utils.BeanUtil;
 import com.answer.api.vo.TitleVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +37,10 @@ public class TitleServiceImpl implements TitleService {
     private AnswerMapper answerMapper;
 
 
-
     /**
      * 查询所有副标题及其状态
+     * @param userId
+     * @return
      */
     @Override
     public List<TitleVo> findAll(Integer userId) {
@@ -72,5 +76,54 @@ public class TitleServiceImpl implements TitleService {
     @Override
     public List<Title> findAllTitle() {
         return titleMapper.selectList(new EntityWrapper<>());
+    }
+
+    /**
+     * 修改副标题
+     * @param titleDto
+     * @return
+     */
+    @Override
+    public Title update(TitleDto titleDto) {
+        if (titleDto.getId() == null){
+            throw new ServiceException(RestCode.BAD_REQUEST_403);
+        }
+        Title title = new Title();
+        BeanUtil.copyProperties(titleDto,title);
+        titleMapper.updateById(title);
+        return title;
+    }
+
+    /**
+     * 增加副标题
+     * @param titleDto
+     * @return
+     */
+    @Override
+    public Title insert(TitleDto titleDto) {
+        if (titleDto.getId() == null) {
+            throw new ServiceException(RestCode.BAD_REQUEST_403);
+        }
+        //初始化entity
+        Title title = new Title();
+        //entity赋值
+        BeanUtil.copyProperties(titleDto,title);
+        //执行添加
+        titleMapper.insert(title);
+        return title;
+    }
+
+    /**
+     * 删除副标题
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer delete(Integer id) {
+        if (id == 0){
+            throw new ServiceException(RestCode.BAD_REQUEST_403);
+        }
+        //返回并执行删除
+        return titleMapper.deleteById(id);
     }
 }

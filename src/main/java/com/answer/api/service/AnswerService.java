@@ -42,6 +42,13 @@ public interface AnswerService {
     LayuiRespResult page(Integer page, Integer size);
 
     /**
+     * 根据id查询单个题目
+     * @param id
+     * @return
+     */
+    Answer get(Integer id);
+
+    /**
      * 结算题目
      * @param list
      * @return

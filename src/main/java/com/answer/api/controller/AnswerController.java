@@ -96,6 +96,13 @@ public class AnswerController {
         return answerService.page(page,size);
     }
 
+    @ApiOperation(value = "根据id查询", notes = "根据id查询")
+    @GetMapping("{id}")
+    public RestApiResult get(@PathVariable Integer id){
+        return new RestApiResult(RestCode.SUCCESS,answerService.get(id));
+    }
+
+
     @ApiOperation(value = "所有副标题",notes = "所有副标题")
     @PostMapping("character")
     public RestApiResult findAllCharacterVo(){

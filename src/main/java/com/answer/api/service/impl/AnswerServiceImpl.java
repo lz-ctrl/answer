@@ -123,6 +123,11 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
+    public Answer get(Integer id) {
+        return answerMapper.selectById(id);
+    }
+
+    @Override
     public AnswerInformation complete(List<AnswerDto> list,Integer titleId,Integer userId) {
         //这里表示总分数
         AtomicInteger score = new AtomicInteger();

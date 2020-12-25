@@ -88,4 +88,10 @@ public interface AnswerService {
      * @return
      */
     AllCharacterVo findAllCharacterAnalysis();
+
+    /**
+     * 根据题目类型查询
+     * @return
+     */
+    LayuiRespResult findAnswerType(Integer answerType,Integer page, Integer size);
 }

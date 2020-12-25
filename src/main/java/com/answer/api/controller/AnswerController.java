@@ -108,4 +108,12 @@ public class AnswerController {
     public RestApiResult findAllCharacterVo(){
         return new RestApiResult(RestCode.SUCCESS,answerService.findAllCharacterAnalysis());
     }
+
+    @ApiOperation(value = "根据题目类型分页查询", notes = "根据题目类型分页查询")
+    @GetMapping("type")
+    public LayuiRespResult findAnswerType(@RequestParam(value = "page",defaultValue = "0")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "10")Integer size,
+                                          @RequestParam(value = "answer_type")Integer answerType){
+        return answerService.findAnswerType(answerType,page,size);
+    }
 }

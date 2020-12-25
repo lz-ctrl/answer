@@ -1,7 +1,9 @@
 package com.answer.api.codec;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.answer.api.entity.Answer;
 import lombok.Data;
 
 /**
@@ -42,5 +44,4 @@ public class LayuiRespResult implements Serializable{
 		result.data = data;
 		return result;
 	}
-	
 }

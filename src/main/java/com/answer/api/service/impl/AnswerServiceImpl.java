@@ -397,10 +397,8 @@ public class AnswerServiceImpl implements AnswerService{
         return answer;
     }
 
-
-
     /**
-     * 查询所有性格类型l
+     * 查询所有性格类型
      * @return
      */
     @Override
@@ -411,5 +409,18 @@ public class AnswerServiceImpl implements AnswerService{
         return allCharacterVo;
     }
 
-
+    /**
+     *根据题目类型分页查询
+     * @param answerType
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public LayuiRespResult findAnswerType(Integer answerType, Integer page, Integer size) {
+        Page<Answer> answerPage = new Page<>(page,size);
+        List<Answer> list = answerMapper.selectPage(answerPage, new EntityWrapper<Answer>().eq("answer_type", answerType));
+        Integer count=answerMapper.selectCount(new EntityWrapper<>());
+        return LayuiRespResult.success(list,count);
+    }
 }

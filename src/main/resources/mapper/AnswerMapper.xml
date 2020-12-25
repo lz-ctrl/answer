@@ -15,6 +15,8 @@
     <result column="DF" property="df" jdbcType="INTEGER" />
     <result column="EF" property="ef" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="title_id" property="titleId" jdbcType="INTEGER" />
+    <result column="answer_type" property="answerType" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="findByIds" resultType="com.answer.api.entity.Answer">

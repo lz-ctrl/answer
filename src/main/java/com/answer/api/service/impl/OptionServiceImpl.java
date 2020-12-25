@@ -7,6 +7,7 @@ import com.answer.api.exception.ServiceException;
 import com.answer.api.mapper.OptionMapper;
 import com.answer.api.service.OptionService;
 import com.answer.api.utils.BeanUtil;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public class OptionServiceImpl implements OptionService {
         Option option=new Option();
         BeanUtil.copyProperties(optionDto, option);
         option.setCreateTime(new Date());
-        optionMapper.insert(option);
+        optionMapper.updateById(option);
         return option;
     }
 
@@ -55,7 +56,7 @@ public class OptionServiceImpl implements OptionService {
         }
         Option option=new Option();
         BeanUtil.copyProperties(optionDto, option);
-        optionMapper.updateById(option);
+        optionMapper.insert(option);
         return option;
     }
 }
